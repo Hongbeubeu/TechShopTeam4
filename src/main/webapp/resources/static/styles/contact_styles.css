@@ -1261,7 +1261,7 @@ select option
 }
 .contact_form_container
 {
-
+	
 }
 .contact_form_title
 {
@@ -1305,35 +1305,31 @@ select option
 {
 	font-size: 16px;
 	font-weight: 400;
-	color: rgba(0,0,0,0.3);
 }
 .input_field:-moz-placeholder,
 .text_field:-moz-placeholder
 {
 	font-size: 16px;
 	font-weight: 400;
-	color: rgba(0,0,0,0.3);
 }
 .input_field::-moz-placeholder,
 .text_field::-moz-placeholder
 {
 	font-size: 16px;
 	font-weight: 400;
-	color: rgba(0,0,0,0.3);
 } 
 .input_field:-ms-input-placeholder,
 .text_field:-ms-input-placeholder
 { 
 	font-size: 16px;
 	font-weight: 400;
-	color: rgba(0,0,0,0.3);
+	
 }
 .input_field::input-placeholder,
 .text_field::input-placeholder
 {
 	font-size: 16px;
 	font-weight: 400;
-	color: rgba(0,0,0,0.3);
 }
 .text_field
 {
