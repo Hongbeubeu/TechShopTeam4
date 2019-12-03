@@ -17,7 +17,7 @@
     <table>
        	<c:forEach var="p" items="${products}">
 				<tr style="border: 1px black solid">
-					
+					<td>${p.productId }</td>
 					<td>${p.name}</td>
 					<td>${p.chip}</td>
 					<td>${p.ram}</td>
