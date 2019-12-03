@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import TechShopTeam4.com.dao.TechShopDAO;
-import TechShopTeam4.com.entities.User;
+import TechShopTeam4.com.entities.*;
 import TechShopTeam4.com.helper.DateTime;
 
 @Service
@@ -59,6 +59,11 @@ public class BaseService {
 			}
 		}
 	}
+	
+	public Laptop findAllProduct() {
+		return techShopDAO.findAllProduct();
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

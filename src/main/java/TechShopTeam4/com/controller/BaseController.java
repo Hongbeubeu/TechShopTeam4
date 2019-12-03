@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import TechShopTeam4.com.entities.User;
 import TechShopTeam4.com.service.BaseService;
@@ -15,8 +16,9 @@ public class BaseController {
 	@Autowired
 	private BaseService baseService;
 	@GetMapping(value = {"/", "/home"})
-	public String index() {
-		return "index";
+	public String index(Model model) {
+		model.addAttribute("products", baseService.findAllProduct());
+		return "products";
 	}
 	@GetMapping(value = "/login")
 	public String login(Model model) {

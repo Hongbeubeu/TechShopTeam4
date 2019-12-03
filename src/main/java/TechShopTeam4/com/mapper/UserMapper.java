@@ -1,7 +1,7 @@
 package TechShopTeam4.com.mapper;
 
-import java.sql.ResultSet;import java.sql.SQLException;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import TechShopTeam4.com.entities.User;

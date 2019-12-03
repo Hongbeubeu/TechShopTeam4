@@ -14,8 +14,21 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/contact_responsive.css" />">
     </head>
     <body>
-        <jsp:include page="header.jsp"></jsp:include>
-           product
-         <jsp:include page="footer.jsp"></jsp:include>
+       	<table>
+				<tr style="border: 1px black solid">
+					<td>${products.productId}</td>
+					<td>${products.name}</td>
+					<td>${products.chip}</td>
+					<td>${products.ram}</td>
+					<td>${products.vga}</td>
+					<td>${products.display}</td>
+					<td>${products.camera}</td>
+					<td>${products.hardDisk}</td>
+					<td>${products.keyboard}</td>
+					<td>${products.port}</td>
+					<td>${products.battery}</td>
+					<td>${products.operaSystem}</td>
+				</tr>
+			</table>
     </body>
 </html>
