@@ -28,6 +28,18 @@ public class BaseController {
 		model.addAttribute("user", new User());
 		return "register";
 	}
+	@GetMapping(value = {"/products"})
+	public String product() {
+		return "products";
+	}
+	@GetMapping(value = {"/cart"})
+	public String cart() {
+		return "cart";
+	}
+	@GetMapping(value = {"/contact"})
+	public String contact() {
+		return "contact";
+	}
 	@PostMapping(value = "/doRegister")
 	public String doRegister(@ModelAttribute("User") User user, 
 								Model model) {

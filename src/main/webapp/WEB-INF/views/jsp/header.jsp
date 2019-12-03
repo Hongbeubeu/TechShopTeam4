@@ -6,7 +6,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div class="super_container">
 
             <!-- Header -->
 
@@ -21,26 +20,6 @@
                                 <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="<c:url value="/resources/images/phone.png" />" alt=""></div>+84 972 511 617</div>
                                 <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="<c:url value="/resources/images/mail.png" />" alt=""></div><a href="mailto:hongbeubeu@gmail.com">hongbeubeu@gmail.com</a></div>
                                 <div class="top_bar_content ml-auto">
-                                    <div class="top_bar_menu">
-                                        <ul class="standard_dropdown top_bar_dropdown">
-                                            <li>
-                                                <a href="#">English<i class="fas fa-chevron-down"></i></a>
-                                                <ul>
-                                                    <li><a href="#">Italian</a></li>
-                                                    <li><a href="#">Spanish</a></li>
-                                                    <li><a href="#">Japanese</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                                                <ul>
-                                                    <li><a href="#">EUR Euro</a></li>
-                                                    <li><a href="#">GBP British Pound</a></li>
-                                                    <li><a href="#">JPY Japanese Yen</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     <div class="top_bar_user">
                                         <div class="user_icon"><img src="<c:url value="/resources/images/user.svg" />" alt=""></div>
                                         <div><a href="/TechShopTeam4.com/register">Register</a></div>
@@ -61,7 +40,7 @@
                             <!-- Logo -->
                             <div class="col-lg-2 col-sm-3 col-3 order-1">
                                 <div class="logo_container">
-                                    <div class="logo"><a href="#">OneTech</a></div>
+                                    <div class="logo"><a href="/TechShopTeam4.com/">OneTech</a></div>
                                 </div>
                             </div>
 
@@ -77,12 +56,6 @@
                                                         <span class="custom_dropdown_placeholder clc">All Categories</span>
                                                         <i class="fas fa-chevron-down"></i>
                                                         <ul class="custom_list clc">
-                                                            <li><a class="clc" href="#">All Categories</a></li>
-                                                            <li><a class="clc" href="#">Computers</a></li>
-                                                            <li><a class="clc" href="#">Laptops</a></li>
-                                                            <li><a class="clc" href="#">Cameras</a></li>
-                                                            <li><a class="clc" href="#">Hardware</a></li>
-                                                            <li><a class="clc" href="#">Smartphones</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -112,7 +85,7 @@
                                                 <div class="cart_count"><span>10</span></div>
                                             </div>
                                             <div class="cart_content">
-                                                <div class="cart_text"><a href="#">Cart</a></div>
+                                                <div class="cart_text"><a href="/TechShopTeam4.com/cart/">Cart</a></div>
                                                 <div class="cart_price">$85</div>
                                             </div>
                                         </div>
@@ -143,29 +116,7 @@
                                         <ul class="cat_menu">
                                             <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
                                             <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
-                                            <li class="hassubs">
-                                                <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
-                                                <ul>
-                                                    <li class="hassubs">
-                                                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                                                        <ul>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Smart Phone<i class="fas fa-chevron-right"></i></a></li>
                                         </ul>
                                     </div>
 
@@ -173,49 +124,15 @@
 
                                     <div class="main_nav_menu ml-auto">
                                         <ul class="standard_dropdown main_nav_dropdown">
-                                            <li><a href="index.jsp">Home<i class="fas fa-chevron-down"></i></a></li>
-                                            <li class="hassubs">
-                                                <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                                        <ul>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="hassubs">
-                                                <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                                        <ul>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="/TechShopTeam4.com/">Home<i class="fas fa-chevron-down"></i></a></li>
                                             <li class="hassubs">
                                                 <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                                                 <ul>
-                                                    <li><a href="Products.jsp">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="Single.jsp">Product<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="Contact.jsp">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="/TechShopTeam4.com/products">Product<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="/TechShopTeam4.com/cart">Cart<i class="fas fa-chevron-down"></i></a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="Contact.jsp">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="/TechShopTeam4.com/contact/">Contact<i class="fas fa-chevron-down"></i></a></li>
                                         </ul>
                                     </div>
 
