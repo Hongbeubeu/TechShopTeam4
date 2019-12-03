@@ -3,6 +3,7 @@ package TechShopTeam4.com.service;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,7 +61,7 @@ public class BaseService {
 		}
 	}
 	
-	public Laptop findAllProduct() {
+	public List<Laptop> findAllProduct() {
 		return techShopDAO.findAllProduct();
 	}
 	

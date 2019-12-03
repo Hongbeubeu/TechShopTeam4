@@ -14,21 +14,23 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/contact_responsive.css" />">
     </head>
     <body>
-       	<table>
+    <table>
+       	<c:forEach var="p" items="${products}">
 				<tr style="border: 1px black solid">
-					<td>${products.productId}</td>
-					<td>${products.name}</td>
-					<td>${products.chip}</td>
-					<td>${products.ram}</td>
-					<td>${products.vga}</td>
-					<td>${products.display}</td>
-					<td>${products.camera}</td>
-					<td>${products.hardDisk}</td>
-					<td>${products.keyboard}</td>
-					<td>${products.port}</td>
-					<td>${products.battery}</td>
-					<td>${products.operaSystem}</td>
+					
+					<td>${p.name}</td>
+					<td>${p.chip}</td>
+					<td>${p.ram}</td>
+					<td>${p.vga}</td>
+					<td>${p.display}</td>
+					<td>${p.camera}</td>
+					<td>${p.hardDisk}</td>
+					<td>${p.keyboard}</td>
+					<td>${p.port}</td>
+					<td>${p.battery}</td>
+					<td>${p.operaSystem}</td>
 				</tr>
+			</c:forEach>
 			</table>
     </body>
 </html>

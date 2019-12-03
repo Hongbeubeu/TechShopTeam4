@@ -1,5 +1,7 @@
 package TechShopTeam4.com.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -38,7 +40,7 @@ public class TechShopDAO {
 		}
 	}
 	
-	public Laptop findAllProduct() {
+	public List<Laptop> findAllProduct() {
 		String sql = "SELECT product_id,"
 				+ "name,"
 				+ "chip,"
@@ -51,10 +53,9 @@ public class TechShopDAO {
 				+ "port,"
 				+ "battery,"
 				+ "opera_system "
-				+ "FROM laptop_description 	"
-				+ "LIMIT 1";
+				+ "FROM laptop_description";
 		try {
-			Laptop laptop = jdbcTemplate.queryForObject(sql, new LaptopMapper());
+			List<Laptop> laptop = jdbcTemplate.query(sql, new LaptopMapper());
 			return laptop;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
