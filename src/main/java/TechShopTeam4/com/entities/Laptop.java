@@ -13,6 +13,21 @@ public class Laptop {
 	private String port;
 	private String battery;
 	private String operaSystem;
+	private int price;
+	private String imgPath;
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 	public int getProductId() {
 		return productId;
 	}

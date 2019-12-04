@@ -21,6 +21,8 @@ public class LaptopMapper implements RowMapper<Laptop>{
 		laptop.setPort(rs.getString("port"));
 		laptop.setBattery(rs.getString("battery"));
 		laptop.setOperaSystem(rs.getString("opera_system"));
+		laptop.setPrice(rs.getInt("price"));
+		laptop.setImgPath(rs.getString("image_path"));
 		return laptop;
 	}
 }

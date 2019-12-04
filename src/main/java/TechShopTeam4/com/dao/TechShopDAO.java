@@ -41,19 +41,26 @@ public class TechShopDAO {
 	}
 	
 	public List<Laptop> findAllProduct() {
-		String sql = "SELECT product_id,"
-				+ "name,"
-				+ "chip,"
-				+ "ram,"
-				+ "vga,"
-				+ "display,"
-				+ "camera,"
-				+ "hard_disk,"
-				+ "keyboard,"
-				+ "port,"
-				+ "battery,"
-				+ "opera_system "
-				+ "FROM laptop_description";
+		String sql = "SELECT ld.product_id,"
+				+ "ld.name,"
+				+ "ld.chip,"
+				+ "ld.ram,"
+				+ "ld.vga,"
+				+ "ld.display,"
+				+ "ld.camera,"
+				+ "ld.hard_disk,"
+				+ "ld.keyboard,"
+				+ "ld.port,"
+				+ "ld.battery,"
+				+ "ld.opera_system,"
+				+ "p.price,"
+				+ "pi.image_path "
+				+ "FROM laptop_description ld,"
+				+ "product p," 
+				+ "product_image pi "
+				+ "WHERE ld.product_id = p.id "
+				+ "AND ld.product_id = pi.product_id "
+				+ "GROUP BY ld.product_id";
 		try {
 			List<Laptop> laptop = jdbcTemplate.query(sql, new LaptopMapper());
 			return laptop;
