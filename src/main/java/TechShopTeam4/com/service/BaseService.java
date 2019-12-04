@@ -65,6 +65,13 @@ public class BaseService {
 		return techShopDAO.findAllProduct();
 	}
 	
+	public Laptop findProductById(int id) {
+		return techShopDAO.findProductById(id);
+	}
+	public List<Image> findProductImageById(int id) {
+		return techShopDAO.findProductImageById(id);
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

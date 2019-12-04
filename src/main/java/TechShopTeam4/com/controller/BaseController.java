@@ -16,8 +16,9 @@ public class BaseController {
 	private BaseService baseService;
 	@GetMapping(value = {"/", "/home"})
 	public String index(Model model) {
-		model.addAttribute("products", baseService.findAllProduct());
-		return "index";
+		model.addAttribute("product", baseService.findProductById(26));
+		model.addAttribute("images", baseService.findProductImageById(26));
+		return "product";
 	}
 	@GetMapping(value = "/login")
 	public String login(Model model) {

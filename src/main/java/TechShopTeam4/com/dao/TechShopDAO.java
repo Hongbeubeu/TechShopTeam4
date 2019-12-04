@@ -68,4 +68,39 @@ public class TechShopDAO {
 			return null;
 		}
 	}
+	
+	public Laptop findProductById(int id) {
+		String sql = "SELECT product_id,"
+				+ "name,"
+				+ "chip,"
+				+ "ram,"
+				+ "vga,"
+				+ "display,"
+				+ "camera,"
+				+ "hard_disk,"
+				+ "keyboard,"
+				+ "port,"
+				+ "battery,"
+				+ "opera_system "
+				+ "FROM laptop_description "
+				+ "WHERE product_id = ?";
+		try {
+			Laptop laptop =jdbcTemplate.queryForObject(sql, new OneLaptopMapper(), id);
+			return laptop;
+		} catch (EmptyResultDataAccessException e) {
+			return null;		
+		}
+	}
+	public List<Image> findProductImageById(int id){
+		String sql = "SELECT image_path "
+				+ "FROM product_image "
+				+ "WHERE product_id = ?";
+		try {
+			List<Image> image = jdbcTemplate.query(sql, new ImageMapper(), id);
+			return image;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
+	}
 }
