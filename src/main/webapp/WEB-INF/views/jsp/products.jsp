@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />">
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/contact_styles.css" />">
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/contact_responsive.css" />">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/img_styles.css" />">
     </head>
     <body>
     <table>
@@ -29,6 +30,7 @@
 					<td>${p.port}</td>
 					<td>${p.battery}</td>
 					<td>${p.operaSystem}</td>
+					<td><img class="img" src="<c:url value="/resources/product_images/Acer Predator Helios 500 PH517-51-71S9_1.jpg"/>" ></td>
 				</tr>
 			</c:forEach>
 			</table>
