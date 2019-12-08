@@ -40,6 +40,16 @@ public class TechShopDAO {
 		}
 	}
 	
+	public User findUserById(int id) {
+		String sql = "SELECT * FROM user WHERE id = ?";
+		try {
+			User user =  jdbcTemplate.queryForObject(sql, new UserMapper(), id);
+			return user;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	public List<Laptop> findAllProduct() {
 		String sql = "SELECT ld.product_id,"
 				+ "ld.name,"
@@ -70,20 +80,23 @@ public class TechShopDAO {
 	}
 	
 	public Laptop findProductById(int id) {
-		String sql = "SELECT product_id,"
-				+ "name,"
-				+ "chip,"
-				+ "ram,"
-				+ "vga,"
-				+ "display,"
-				+ "camera,"
-				+ "hard_disk,"
-				+ "keyboard,"
-				+ "port,"
-				+ "battery,"
-				+ "opera_system "
-				+ "FROM laptop_description "
-				+ "WHERE product_id = ?";
+		String sql = "SELECT ld.product_id,"
+				+ "ld.name,"
+				+ "ld.chip,"
+				+ "ld.ram,"
+				+ "ld.vga,"
+				+ "ld.display,"
+				+ "ld.camera,"
+				+ "ld.hard_disk,"
+				+ "ld.keyboard,"
+				+ "ld.port,"
+				+ "ld.battery,"
+				+ "ld.opera_system,"
+				+ "p.price "
+				+ "FROM laptop_description ld,"
+				+ "product p "
+				+ "WHERE ld.product_id = ? "
+				+ "AND ld.product_id = p.id";
 		try {
 			Laptop laptop =jdbcTemplate.queryForObject(sql, new OneLaptopMapper(), id);
 			return laptop;
@@ -101,6 +114,34 @@ public class TechShopDAO {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-		
+	}
+	
+	public void addToCart(int userId, int productId, int quantity, int totalPrice, String status, int createAt) {
+		String sql = "INSERT INTO cart "
+				+ "(customer_id, product_id, quantity, total_price, status, create_at) "
+				+ "	VALUES (?, ?, ?, ?, ?, ?) ";
+		jdbcTemplate.update(sql, userId, productId, quantity, totalPrice, status, createAt);
+	}
+	
+	public List<Cart> findCartByUserId(int userId) {
+		String sql = "SELECT c.customer_id,"
+				+ "c.product_id,"
+				+ "c.quantity,"
+				+ "c.total_price,"
+				+ "c.status,"
+				+ "p.name,"
+				+ "i.image_path,"
+				+ "FROM cart c, product_image i, laptop_description l "
+				+ "WHERE c.customer_id = ? "
+				+ "AND c.status = ? "
+				+ "AND c.product_id = i.product_id "
+				+ "AND c.product_id = l.product_id "
+				+ "GROUP BY p.name";
+		try {
+			List<Cart> cart = jdbcTemplate.query(sql, new CartMapper(), userId, "incart");
+			return cart;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 }

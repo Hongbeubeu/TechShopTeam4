@@ -14,9 +14,10 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/contact_responsive.css" />">
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/product_styles.css" />">
     </head>
-	<body>	
+	<body>
+	<c:url value="/addToCart" var="addToCart"/>	
         <jsp:include page="header.jsp"></jsp:include>
-       
+        
         	<h1 class= "product_name">${product.name }</h1><br>
         	<div class ="row">
 	        	<c:forEach var="image" items="${images }">
@@ -56,16 +57,17 @@
 	        <div class = "col">
 	        	<p>Quantity: </p>
 	        </div>
-	    <div class = "col">
-		   <form>
-		   		<input type="number">
-		   		<input type="hidden" value="${user.Id }">
-		   		<input type="hidden" value="${product.productId }">
-           		<button class="btn btn-primary">Add to Cart</button>
-           </form>                                
-		   
-	    </div>
-	    </div>
-        <jsp:include page="footer.jsp"></jsp:include>
+		    <div class = "col">
+		    	
+			   <form action="addToCart" method="POST">
+			   		<input type="number" name = "quantity">
+			   		<input type="hidden" value="${user.id }" name = "userId">
+			   		<input type="hidden" value="${product.price }" name = "price">
+			   		<input type="hidden" value="${product.productId }" name = "productId">
+	           		<button class="btn btn-primary">Add to Cart</button>
+	           </form>
+		    </div>
+	    </div> 
+	    <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

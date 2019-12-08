@@ -72,6 +72,20 @@ public class BaseService {
 		return techShopDAO.findProductImageById(id);
 	}
 	
+	public void addToCart(int userId, int productId, int quantity, int totalPrice) {
+		String status = "inCart";
+		int createAt = DateTime.setDateToInt();
+		techShopDAO.addToCart(userId, productId, quantity, totalPrice, status, createAt);
+	}
+	
+	public User findUserById(int id) {
+		return techShopDAO.findUserById(id);
+	}
+	
+	public List<Cart> findCartByUserId(int userId) {
+		return techShopDAO.findCartByUserId(userId);
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

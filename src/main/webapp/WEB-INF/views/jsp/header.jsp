@@ -23,7 +23,12 @@
                                     <div class="top_bar_user">
                                         <div class="user_icon"><img src="<c:url value="/resources/images/user.svg" />" alt=""></div>
                                         <div><a href="/TechShopTeam4.com/register">Register</a></div>
-                                        <div><a href="/TechShopTeam4.com/login">Sign in</a></div>
+                                        <c:if test="${empty user }">
+                                        	<div><a href="/TechShopTeam4.com/login">Sign in</a></div>
+                                        </c:if>
+                                        <c:if test="${not empty user }">
+                                        	<div><a href="/TechShopTeam4.com/profile/${user.id }">Customer</a></div>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
