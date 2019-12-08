@@ -7,10 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<c:forEach var="cart" items="${cart }">
 	${cart.userId }<br>
+	${cart.name }<br>
+	<img src="<c:url value="/resources/product_images/${cart.imgPath }" />" alt="">
 	${cart.productId }<br>
 	${cart.quantity }<br>
 	${cart.totalPrice }<br>
+</c:forEach>
 </body>
 </html>

@@ -6,7 +6,7 @@ public class Cart {
 	private String name;
 	private int quantity;
 	private int totalPrice;
-	private String imgUrl;
+	private String imgPath;
 	private String status;
 	
 	
@@ -16,11 +16,11 @@ public class Cart {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getImgUrl() {
-		return imgUrl;
+	public String getImgPath() {
+		return imgPath;
 	}
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 	public int getUserId() {
 		return userId;

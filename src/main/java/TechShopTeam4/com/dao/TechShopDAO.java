@@ -129,14 +129,14 @@ public class TechShopDAO {
 				+ "c.quantity,"
 				+ "c.total_price,"
 				+ "c.status,"
-				+ "p.name,"
-				+ "i.image_path,"
+				+ "l.name,"
+				+ "i.image_path "
 				+ "FROM cart c, product_image i, laptop_description l "
 				+ "WHERE c.customer_id = ? "
 				+ "AND c.status = ? "
 				+ "AND c.product_id = i.product_id "
 				+ "AND c.product_id = l.product_id "
-				+ "GROUP BY p.name";
+				+ "GROUP BY l.name";
 		try {
 			List<Cart> cart = jdbcTemplate.query(sql, new CartMapper(), userId, "incart");
 			return cart;
