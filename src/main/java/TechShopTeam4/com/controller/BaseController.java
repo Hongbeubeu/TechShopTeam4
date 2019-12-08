@@ -16,10 +16,13 @@ import TechShopTeam4.com.service.BaseService;
 public class BaseController {
 	@Autowired
 	private BaseService baseService;
-	@GetMapping(value = {"/", "/home"})
-	public String index(Model model) {
+	@GetMapping(value = {"/", "/{userId}", "/home/{userId}"})
+	public String index(Model model,
+			@PathVariable(value = "userId", required = false) Integer userId) {
 		model.addAttribute("products", baseService.findAllProduct());
-		return "test";
+		if(userId != null)
+			model.addAttribute("user", baseService.findUserById(userId));
+		return "index";
 	}
 	@GetMapping(value = "/login")
 	public String login(Model model) {
@@ -31,18 +34,24 @@ public class BaseController {
 		model.addAttribute("user", new User());
 		return "register";
 	}
-	@GetMapping(value = {"/products"})
-	public String product() {
-		return "products";
+	@GetMapping(value = {"/product/{productId}", "/product/{userId}/{productId}"})
+	public String product(Model model, 
+			@PathVariable(value = "productId", required = false) Integer productId,
+			@PathVariable(value = "userId", required = false) Integer userId) {
+		if(userId != null)
+			model.addAttribute("user", baseService.findUserById(userId));
+		model.addAttribute("user", baseService.findUserById(userId));
+		model.addAttribute("images", baseService.findProductImageById(productId));
+		model.addAttribute("product", baseService.findProductById(productId));
+		return "product";
 	}
 	@GetMapping(value = {"/cart/{userId}"})
-	public String cart(@PathVariable("userId") int userId, Model model) {
+	public String cart(@PathVariable("userId") int userId,
+			Model model) {
+		model.addAttribute("user", baseService.findUserById(userId));
 		model.addAttribute("cart", baseService.findCartByUserId(userId));
+		model.addAttribute("totalPrice", baseService.totalPriceIncart(baseService.findCartByUserId(userId)));
 		return "cart";
-	}
-	@GetMapping(value = {"/contact"})
-	public String contact() {
-		return "contact";
 	}
 	@GetMapping(value = {"/profile/{id}"})
 	public String profile(Model model,
@@ -56,7 +65,7 @@ public class BaseController {
 			  				@RequestParam(value = "quantity", required = true) Integer quantity,
 			  				@RequestParam(value = "price", required = true) Integer price) {
 		baseService.addToCart(userId,productId,quantity, price * quantity);
-		return "cart";
+		return "redirect:/home/" + userId;
 		
 	}
 	@PostMapping(value = "/doRegister")
@@ -77,10 +86,7 @@ public class BaseController {
 		if( tuser == null)
 			return "redirect:/login";
 		else {
-			model.addAttribute("product", baseService.findProductById(26));
-			model.addAttribute("images", baseService.findProductImageById(26));
-			model.addAttribute("user", tuser);
-			return "product";
+			return "redirect:/" + tuser.getId();
 		}
 	}
 }

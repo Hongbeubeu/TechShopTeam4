@@ -86,6 +86,14 @@ public class BaseService {
 		return techShopDAO.findCartByUserId(userId);
 	}
 	
+	public int totalPriceIncart(List<Cart> cart) {
+		int totalPrice = 0;
+		for(Cart c: cart) {
+			totalPrice += c.getTotalPrice();
+		}
+		return totalPrice;
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

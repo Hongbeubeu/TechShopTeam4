@@ -22,7 +22,7 @@
         	<div class ="row">
 	        	<c:forEach var="image" items="${images }">
 	        		<div class ="col" style = "width: 150px">
-	        			<img src="resources/product_images/${image.imgPath }">
+	        			<img src="<c:url value="/resources/product_images/${image.imgPath }" />" alt="">
 	        		</div>
 	        	</c:forEach>
         	</div>
