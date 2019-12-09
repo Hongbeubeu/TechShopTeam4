@@ -72,10 +72,24 @@ public class BaseService {
 		return techShopDAO.findProductImageById(id);
 	}
 	
-	public void addToCart(int userId, int productId, int quantity, int totalPrice) {
+	public boolean addToCart(int userId, int productId, int quantity, int totalPrice) {
+		Cart cart = techShopDAO.findProductInCart(userId, productId);
+		if(cart != null) {
+			quantity += cart.getQuantity();
+			if(quantity > techShopDAO.findProductById(productId).getQuantity())
+				return false;
+			totalPrice += cart.getTotalPrice();
+			techShopDAO.addToExistCart(userId, productId, quantity, totalPrice);
+			return true;
+		}
 		String status = "inCart";
 		int createAt = DateTime.setDateToInt();
 		techShopDAO.addToCart(userId, productId, quantity, totalPrice, status, createAt);
+		return true;
+	}
+	
+	public void deleteCart(int userId, int productId) {
+		techShopDAO.deleteCart(userId, productId);
 	}
 	
 	public User findUserById(int id) {

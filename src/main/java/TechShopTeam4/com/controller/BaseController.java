@@ -18,9 +18,10 @@ public class BaseController {
 	private BaseService baseService;
 	
 	//trang index
-	@GetMapping(value = {"/", "/{userId}", "/home/{userId}"})
+	@GetMapping(value = {"/", "/{userId}"})
 	public String index(Model model,
-			@PathVariable(value = "userId", required = false) Integer userId) {
+			@PathVariable(value = "userId", required = false) Integer userId,
+			@RequestParam(value = "productName", required = false) String productName) {
 		model.addAttribute("products", baseService.findAllProduct());
 		if(userId != null)
 			model.addAttribute("user", baseService.findUserById(userId));
@@ -76,9 +77,27 @@ public class BaseController {
 	public String addTocart(@RequestParam(value = "userId", required = true) Integer userId, 
 			  				@RequestParam(value = "productId", required = true) Integer productId, 
 			  				@RequestParam(value = "quantity", required = true) Integer quantity,
-			  				@RequestParam(value = "price", required = true) Integer price) {
-		baseService.addToCart(userId,productId,quantity, price * quantity);
-		return "redirect:/home/" + userId;
+			  				@RequestParam(value = "price", required = true) Integer price,
+			  				Model model) {
+		if(quantity > baseService.findProductById(productId).getQuantity()){
+			model.addAttribute("error", "so luong san pham trong kho it hon so luong khach yeu cau");
+			return "error";
+		}
+		if(baseService.addToCart(userId,productId,quantity, price * quantity))
+			return "redirect:/" + userId +"/cart";
+		else {
+			model.addAttribute("error", "so luong san pham trong kho it hon so luong khach yeu cau");
+			return "error";
+		}
+	}
+	
+	//delte san pham khoi cart
+	@GetMapping(value = "/deleteCart/{userId}/{productId}")
+	public String deleteCart(@PathVariable(value = "userId", required = true) Integer userId, 
+				@PathVariable(value = "productId", required = true) Integer productId,
+				Model model) {
+		baseService.deleteCart(userId, productId);
+		return "redirect:/cart/" + userId;
 		
 	}
 	

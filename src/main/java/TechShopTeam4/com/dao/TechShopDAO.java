@@ -63,6 +63,7 @@ public class TechShopDAO {
 				+ "ld.port,"
 				+ "ld.battery,"
 				+ "ld.opera_system,"
+				+ "p.quantity,"
 				+ "p.price,"
 				+ "pi.image_path "
 				+ "FROM laptop_description ld,"
@@ -92,17 +93,39 @@ public class TechShopDAO {
 				+ "ld.port,"
 				+ "ld.battery,"
 				+ "ld.opera_system,"
+				+ "p.quantity,"
 				+ "p.price "
 				+ "FROM laptop_description ld,"
 				+ "product p "
 				+ "WHERE ld.product_id = ? "
-				+ "AND ld.product_id = p.id";
+				+ "AND ld.product_id = p.id "
+				+ "LIMIT 1";
 		try {
 			Laptop laptop =jdbcTemplate.queryForObject(sql, new OneLaptopMapper(), id);
 			return laptop;
 		} catch (EmptyResultDataAccessException e) {
 			return null;		
 		}
+	}
+	public Cart findProductInCart(int userId, int productId) {
+		String sql = "SELECT customer_id,"
+				+ "product_id,"
+				+ "quantity,"
+				+ "total_price "
+				+ "FROM cart "
+				+ "WHERE customer_id = ? "
+				+ "AND product_id = ? "
+				+ "AND status = ? ";
+		try {
+			Cart cart = jdbcTemplate.queryForObject(sql, new CheckCartMapper(), userId, productId, "incart");
+			return cart;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	public void deleteCart(int userId, int productId) {
+		String sql = "DELETE FROM cart WHERE customer_id = ? AND product_id = ? ";
+		jdbcTemplate.update(sql, userId, productId);
 	}
 	public List<Image> findProductImageById(int id){
 		String sql = "SELECT image_path "
@@ -123,6 +146,14 @@ public class TechShopDAO {
 		jdbcTemplate.update(sql, userId, productId, quantity, totalPrice, status, createAt);
 	}
 	
+	public void addToExistCart(int userId, int productId, int quantity, int totalPrice) {
+		String sql = "UPDATE cart "
+				+ "SET quantity = ?,"
+				+ "total_price = ? "
+				+ "WHERE customer_id = ? "
+				+ "AND product_id = ? ";
+		jdbcTemplate.update(sql, quantity, totalPrice, userId, productId);
+	}
 	public List<Cart> findCartByUserId(int userId) {
 		String sql = "SELECT c.customer_id,"
 				+ "c.product_id,"

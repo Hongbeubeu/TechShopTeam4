@@ -58,8 +58,10 @@
 	                        <div class="header_search">
 	                            <div class="header_search_content">
 	                                <div class="header_search_form_container">
-	                                    <form action="#" class="header_search_form clearfix">
-	                                        <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+	                                <c:if test="${not empty user }">
+	                                    <form action="/TechShopTeam4.com/${user.id }" class="header_search_form clearfix">
+	                                    	<input type ="hidden" name = "userId" value = "${user.id }">
+	                                        <input type="search" name = "productName" required="required" class="header_search_input" placeholder="Search for products...">
 	                                        <div class="custom_dropdown">
 	                                            <div class="custom_dropdown_list">
 	                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
@@ -70,6 +72,21 @@
 	                                        </div>
 	                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="<c:url value="/resources/images/search.png" />" alt=""></button>
 	                                    </form>
+	                                </c:if>
+	                                <c:if test="${empty user }">
+	                                    <form action="/TechShopTeam4.com/" class="header_search_form clearfix">
+	                                        <input type="search" name = "productName" required="required" class="header_search_input" placeholder="Search for products...">
+	                                        <div class="custom_dropdown">
+	                                            <div class="custom_dropdown_list">
+	                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
+	                                                <i class="fas fa-chevron-down"></i>
+	                                                <ul class="custom_list clc">
+	                                                </ul>
+	                                            </div>
+	                                        </div>
+	                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="<c:url value="/resources/images/search.png" />" alt=""></button>
+	                                    </form>
+	                                </c:if>
 	                                </div>
 	                            </div>
 	                        </div>

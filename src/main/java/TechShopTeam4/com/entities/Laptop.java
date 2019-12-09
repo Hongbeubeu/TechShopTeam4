@@ -13,9 +13,17 @@ public class Laptop {
 	private String port;
 	private String battery;
 	private String operaSystem;
+	private int quantity;
 	private int price;
 	private String imgPath;
 	
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public int getPrice() {
 		return price;
 	}

@@ -39,7 +39,7 @@
 					<td><a href="/TechShopTeam4.com/product/${user.id }/${cart.productId}">${cart.name}</a></td>
 					<td>${cart.quantity}</td>
 					<td>${cart.totalPrice} VND</td>
-					<td> <a href="#">Delete</a></td>
+					<td> <a href="/TechShopTeam4.com/deleteCart/${user.id }/${cart.productId}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		
