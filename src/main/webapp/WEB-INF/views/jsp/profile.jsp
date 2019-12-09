@@ -20,8 +20,9 @@
         </style>
     </head>
     <body>
-    	<c:url value="/purchased" var="purchase"/>
-    	<c:url value="/cart" var="cart"/>
+    	<c:url value="/purchased/${user.id }" var="purchased"/>
+    	<c:url value="/cart/${user.id }" var="cart"/>
+    	<c:url value="/logout" var="logout"/>
         <jsp:include page="header.jsp"></jsp:include>
         <h1 align="center" class="contact_form_title">Profile</h1>
         <div class="row">
@@ -37,16 +38,13 @@
         		<p>${user.address }</p>
         	</div>
         	<div class="col">
-        		<form action="purchased" method="POST">
-        			<input type="hidden" value="${user.id }" name="userId">
+        		<form action="${purchased}" method="GET">
         			<button class="btn btn-primary button" type="submit">Purchased</button>
         		</form>
-        		<form action="cart" method="POST">
-        			<input type="hidden" value="${user.id }" name="userId">
+        		<form action="${cart }" method="GET">
         			<button class="btn btn-primary button" type="submit">Cart</button>
         		</form>
-        		<form action="logout" method="POST">
-        			<input type="hidden" value="${user.id }" name="userId">
+        		<form action="${logout }" method="GET">
         			<button class="btn btn-danger button" type="submit">Log Out</button>
         		</form>
         	</div>

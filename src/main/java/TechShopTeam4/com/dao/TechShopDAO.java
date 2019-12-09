@@ -175,4 +175,87 @@ public class TechShopDAO {
 			return null;
 		}
 	}
+	
+	public List<Laptop> searchProductByName(String productName){
+		String sql = "SELECT ld.product_id,"
+				+ "ld.name,"
+				+ "ld.chip,"
+				+ "ld.ram,"
+				+ "ld.vga,"
+				+ "ld.display,"
+				+ "ld.camera,"
+				+ "ld.hard_disk,"
+				+ "ld.keyboard,"
+				+ "ld.port,"
+				+ "ld.battery,"
+				+ "ld.opera_system,"
+				+ "p.quantity,"
+				+ "p.price,"
+				+ "pi.image_path "
+				+ "FROM laptop_description ld,"
+				+ "product p," 
+				+ "product_image pi "
+				+ "WHERE ld.name LIKE ? "
+				+ "AND ld.product_id = p.id "
+				+ "AND ld.product_id = pi.product_id "
+				+ "GROUP BY ld.product_id";
+		try {
+			List<Laptop> laptop = jdbcTemplate.query(sql, new LaptopMapper(), productName); 
+			return laptop;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public void addToOrder(int userId, int totalPrice, int createAt) {
+		String sql = "INSERT INTO `order` (customer_id, total_price, payment_method, status, create_at) VALUES (?,?,?,?,?)";
+		String paymentMethod = "ttknh";
+		String status = "inorder";
+		jdbcTemplate.update(sql, userId, totalPrice, paymentMethod, status, createAt);
+	}
+	
+	public Order findOrderIdByCreateAt(int createAt) {
+		String sql = "SELECT id "
+				+ "FROM `order` "
+				+ "WHERE create_at = ? "
+				+ "AND status = ?";
+		try {
+			Order order = jdbcTemplate.queryForObject(sql, new OrderIdMapper(), createAt, "inorder");
+			return order;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public void addOrderDetail(int orderId, int productId, int quantity, String status, int createAt) {
+		String sql = "INSERT INTO order_detail "
+				+ "(order_id, product_id, quantity, status, create_at) "
+				+ "VALUES (?, ?, ?, ?, ?) ";
+		jdbcTemplate.update(sql, orderId, productId, quantity, status, createAt);
+	}
+	
+	public void fillFormDelivery(Delivery delivery, int createAt) {
+		String sql = "INSERT INTO `delivery` "
+				+ "(order_id, first_name, last_name, phone_number, address, create_at) "
+				+ "VALUES (?, ?, ?, ?, ?, ?) ";
+		jdbcTemplate.update(sql, 
+				delivery.getOrderId(), 
+				delivery.getFirstName(), 
+				delivery.getLastName(),
+				delivery.getPhoneNumber(),
+				delivery.getAddress(),
+				createAt);
+	}
+	
+	public List<Order> findOrderByUserId(int userId){
+		String sql = "SELECT id, total_price, status "
+				+ "FROM `order` "
+				+ "WHERE customer_id = ? ";
+		try {
+			List<Order> order = jdbcTemplate.query(sql, new OrderMapper(), userId);
+			return order;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }

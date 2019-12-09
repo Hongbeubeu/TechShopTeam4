@@ -108,6 +108,32 @@ public class BaseService {
 		return totalPrice;
 	}
 	
+	public List<Laptop> searchProductByName(String productName) {
+		productName = "%" + productName + "%";
+		return techShopDAO.searchProductByName(productName);
+	}
+	
+	public int addToOrder(int userId) {
+		List<Cart> cart = findCartByUserId(userId);
+		int totalPrice = totalPriceInCart(cart);
+		int date = DateTime.setDateToInt();
+		techShopDAO.addToOrder(userId, totalPrice, date);
+		int orderId = techShopDAO.findOrderIdByCreateAt(date).getId();
+		for(Cart c: cart) {
+			deleteCart(userId, c.getProductId());
+			techShopDAO.addOrderDetail(orderId, c.getProductId(), c.getQuantity(), "inorder", DateTime.setDateToInt());
+		}
+		return orderId;
+	}
+	
+	public void fillFormDelivery(Delivery delivery) {
+		techShopDAO.fillFormDelivery(delivery, DateTime.setDateToInt());
+	}
+	
+	public List<Order> findOrderByUserId(int userId){
+		return techShopDAO.findOrderByUserId(userId);
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

@@ -3,27 +3,61 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>OneTech</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="OneTech shop project">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/bootstrap4/bootstrap.min.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/animate.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/slick-1.8.0/slick.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/main_styles.css" />">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/responsive.css" />">
+<head>
+    <title>OneTech</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/bootstrap4/bootstrap.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/animate.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/slick-1.8.0/slick.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/main_styles.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/responsive.css" />">
 
-    </head>
-    <body>
+</head>
+<body>
+    <c:url value="/addToCart" var="addToCart"/>	
         <div class="super_container">
-        
             <jsp:include page="header.jsp"></jsp:include>
             <jsp:include page="banner.jsp"></jsp:include>
-           
+    <c:if test = "${not empty search }">
+	<h1 align = "center" class ="contact_form">Search</h1>
+	<br>
+	<br>
+	<table class="table table-hover">
+		<tr>
+			<th>Product Image</th>
+			<th>Product Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<c:if test = "${not empty user }">
+				<th>Add To Cart</th>
+			</c:if>
+		</tr>
+		<c:forEach var="search" items="${search}">
+			<tr>
+				<td><img width="20%" src="<c:url value="/resources/product_images/${search.imgPath }" />" alt=""></td>
+				<td><a href="/TechShopTeam4.com/product/${search.productId}">${search.name}</a></td>
+				<td>${search.quantity}</td>
+				<td>${search.price} VND</td>
+				<td>
+					<c:if test = "${not empty user }">
+				   		<form action="${addToCart}" method="POST">
+					   		<input type="hidden" name = "quantity" value = "1">
+					   		<input type="hidden" value="${user.id }" name = "userId">
+					   		<input type="hidden" value="${search.price }" name = "price">
+					   		<input type="hidden" value="${search.productId }" name = "productId">
+			           		<button class="btn btn-primary">Add to Cart</button>
+		          	 	</form>
+	    			</c:if>
+	    		</td>
+			</tr>
+		</c:forEach>
+	</table>
+ 	</c:if>
             <!-- Deals of the week -->
 
             <div class="deals_featured">
@@ -91,7 +125,7 @@
                                     <div class="deals_slider_next deals_slider_nav"><i class="fas fa-chevron-right ml-auto"></i></div>
                                 </div>
                             </div>
-
+                            
                             <!-- Featured -->
                             <div class="featured">
                                 <div class="tabbed_container">
@@ -117,7 +151,14 @@
                                                         <c:if test = "${not empty user }">                                                        
 	                                                        <div class="product_name"><div><a href="/TechShopTeam4.com/product/${user.id }/${p.productId}">${p.name}</a></div></div>
 	                                                        <div class="product_extras">
-	                                                            <button class="product_cart_button">Add to Cart</button>
+		                                                        <form action="${addToCart}" method="POST">
+															   		<input type="hidden" name = "quantity" value = "1">
+															   		<input type="hidden" value="${user.id }" name = "userId">
+															   		<input type="hidden" value="${p.price }" name = "price">
+															   		<input type="hidden" value="${p.productId }" name = "productId">
+													           		<button class="product_cart_button">Add to Cart</button>
+													           </form>
+	                                                           
 	                                                        </div>
                                                         </c:if>
                                                         <c:if test = "${empty user }">                                                        

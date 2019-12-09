@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import TechShopTeam4.com.entities.User;
+import TechShopTeam4.com.entities.*;
 import TechShopTeam4.com.service.BaseService;
 
 @Controller
@@ -25,6 +25,8 @@ public class BaseController {
 		model.addAttribute("products", baseService.findAllProduct());
 		if(userId != null)
 			model.addAttribute("user", baseService.findUserById(userId));
+		if(productName != null)
+			model.addAttribute("search", baseService.searchProductByName(productName));
 		return "index";
 	}
 	
@@ -84,7 +86,7 @@ public class BaseController {
 			return "error";
 		}
 		if(baseService.addToCart(userId,productId,quantity, price * quantity))
-			return "redirect:/" + userId +"/cart";
+			return "redirect:/cart/" + userId;
 		else {
 			model.addAttribute("error", "so luong san pham trong kho it hon so luong khach yeu cau");
 			return "error";
@@ -101,6 +103,35 @@ public class BaseController {
 		
 	}
 	
+	//thanh toan
+	@PostMapping(value = "/pay/{userId}")
+	public String pay(@PathVariable(value = "userId", required = true) Integer userId,
+			Model model) {
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", baseService.findUserById(userId));
+		model.addAttribute("orderId", baseService.addToOrder(userId));
+		model.addAttribute("delivery", new Delivery());
+		return "pay";
+	}
+	
+	//xu ly form van chuyen
+	@PostMapping(value = "/doPay/{userId}")
+	public String doPay(@ModelAttribute("delivery") Delivery delivery,
+			@PathVariable(value = "userId", required = true) Integer userId,
+			Model model) {
+		baseService.fillFormDelivery(delivery);
+		return "redirect:/" + userId;
+	}
+	
+	//purchased
+	@GetMapping(value = "/purchased/{userId}")
+	public String purchased(@PathVariable(value = "userId") Integer userId,
+			Model model) {
+		model.addAttribute("purchased", baseService.findOrderByUserId(userId));
+		model.addAttribute("user", baseService.findUserById(userId));
+		model.addAttribute("userId", userId);
+		return "purchased";
+	}
 	//xu ly register
 	@PostMapping(value = "/doRegister")
 	public String doRegister(@ModelAttribute("User") User user, 
@@ -124,5 +155,11 @@ public class BaseController {
 		else {
 			return "redirect:/" + tuser.getId();
 		}
+	}
+	
+	//log out
+	@GetMapping(value = "/logout")
+	public  String logout() {
+		return "redirect:/";
 	}
 }
