@@ -59,7 +59,7 @@
 		        	<p>Quantity: </p>
 		        </div>
 			    <div class = "col">
-				   <form action="addToCart" method="POST">
+				   <form action="${addToCart}" method="POST">
 				   		<input type="number" name = "quantity">
 				   		<input type="hidden" value="${user.id }" name = "userId">
 				   		<input type="hidden" value="${product.price }" name = "price">

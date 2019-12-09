@@ -86,7 +86,7 @@ public class BaseService {
 		return techShopDAO.findCartByUserId(userId);
 	}
 	
-	public int totalPriceIncart(List<Cart> cart) {
+	public int totalPriceInCart(List<Cart> cart) {
 		int totalPrice = 0;
 		for(Cart c: cart) {
 			totalPrice += c.getTotalPrice();

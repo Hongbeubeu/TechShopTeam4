@@ -59,7 +59,7 @@ public class BaseController {
 			Model model) {
 		model.addAttribute("user", baseService.findUserById(userId));
 		model.addAttribute("cart", baseService.findCartByUserId(userId));
-		model.addAttribute("totalPrice", baseService.totalPriceIncart(baseService.findCartByUserId(userId)));
+		model.addAttribute("totalPrice", baseService.totalPriceInCart(baseService.findCartByUserId(userId)));
 		return "cart";
 	}
 	
