@@ -53,21 +53,22 @@
 		        	</div>
 	        	</div>
 	        </div>
-	        <div class = "row">
-	        <div class = "col">
-	        	<p>Quantity: </p>
-	        </div>
-		    <div class = "col">
-		    	
-			   <form action="addToCart" method="POST">
-			   		<input type="number" name = "quantity">
-			   		<input type="hidden" value="${user.id }" name = "userId">
-			   		<input type="hidden" value="${product.price }" name = "price">
-			   		<input type="hidden" value="${product.productId }" name = "productId">
-	           		<button class="btn btn-primary">Add to Cart</button>
-	           </form>
-		    </div>
-	    </div> 
-	    <jsp:include page="footer.jsp"></jsp:include>
+	        <c:if test = "${not empty user }">
+		        <div class = "row">
+		        <div class = "col">
+		        	<p>Quantity: </p>
+		        </div>
+			    <div class = "col">
+				   <form action="addToCart" method="POST">
+				   		<input type="number" name = "quantity">
+				   		<input type="hidden" value="${user.id }" name = "userId">
+				   		<input type="hidden" value="${product.price }" name = "price">
+				   		<input type="hidden" value="${product.productId }" name = "productId">
+		           		<button class="btn btn-primary">Add to Cart</button>
+		           </form>
+			    </div>
+		    	</div> 
+		    </c:if>
+		<jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

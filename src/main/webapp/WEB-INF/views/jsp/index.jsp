@@ -97,7 +97,7 @@
                                 <div class="tabbed_container">
                                     <div class="tabs">
                                         <ul class="clearfix">
-                                            <li class="active">Featured</li>                                        
+                                            <li class="active">Products</li>                                        
                                         </ul>
                                         <div class="tabs_line"><span></span></div>
                                     </div>
@@ -114,10 +114,15 @@
                                                     <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="<c:url value="/resources/product_images/${p.imgPath }" />" alt=""></div>
                                                     <div class="product_content">
                                                         <div class="product_price discount">$ ${p.price }</div>
-                                                        <div class="product_name"><div><a href="#">${p.name}</a></div></div>
-                                                        <div class="product_extras">
-                                                            <button class="product_cart_button">Add to Cart</button>
-                                                        </div>
+                                                        <c:if test = "${not empty user }">                                                        
+	                                                        <div class="product_name"><div><a href="/TechShopTeam4.com/product/${user.id }/${p.productId}">${p.name}</a></div></div>
+	                                                        <div class="product_extras">
+	                                                            <button class="product_cart_button">Add to Cart</button>
+	                                                        </div>
+                                                        </c:if>
+                                                        <c:if test = "${empty user }">                                                        
+	                                                        <div class="product_name"><div><a href="/TechShopTeam4.com/product/${p.productId}">${p.name}</a></div></div>
+                                                        </c:if>
                                                     </div>
                                                     <div class="product_fav"><i class="fas fa-heart"></i></div>
                                                 </div>

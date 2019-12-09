@@ -20,12 +20,10 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<br>
 	<br>
-
+	<c:if test="${not empty cart}">
 	<h1 align = "center" class ="contact_form">Cart</h1>
 	<br>
 	<br>
-
-
 	<table class="table table-hover">
 		<tr>
 			<th>Image</th>
@@ -34,35 +32,40 @@
 			<th>Price</th>
 			<th>Delete</th>
 		</tr>
-		<c:if test="${not empty cart}">
+		
 			<c:forEach var="cart" items="${cart}">
 				<tr>
 					<td><img width="50%" src="<c:url value="/resources/product_images/${cart.imgPath }" />" alt=""></td>
 					<td><a href="/TechShopTeam4.com/product/${user.id }/${cart.productId}">${cart.name}</a></td>
 					<td>${cart.quantity}</td>
-					<td>${cart.totalPrice} Nghin dong</td>
+					<td>${cart.totalPrice} VND</td>
 					<td> <a href="#">Delete</a></td>
 				</tr>
 			</c:forEach>
-		</c:if>
+		
 	</table>
+	
 	<div class = "row">
-	<div class = "col"></div>
-	<div class = "col"></div>
-	<div class = "col">
-	<form action="pay" method = "POST">
-		<button class="btn btn-primary button" style="width:100%">Pay</button>
-	</form>
+		<div class = "col"></div>
+		<div class = "col"></div>
+		<div class = "col">
+		<form action="pay" method = "POST">
+			<button class="btn btn-primary button" style="width:100%">Pay</button>
+		</form>
+		</div>
+		<div class = "col">
+		<p>Total Price </p>
+		
+		</div>
+		<div class = "col">
+		<p>${totalPrice } VND</p>
+		
+		</div>
 	</div>
-	<div class = "col">
-	<p>Total Price </p>
-	
-	</div>
-	<div class = "col">
-	<p>${totalPrice } Nghin dong</p>
-	
-	</div>
-	</div>
+	</c:if>
+	<c:if test="${empty cart}">
+		<h1 align = "center" class ="contact_form">Empty Cart</h1>
+	</c:if>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

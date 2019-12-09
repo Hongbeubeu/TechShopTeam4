@@ -35,7 +35,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel"></div>
             </div>
          <jsp:include page="footer.jsp"></jsp:include>
     </body>

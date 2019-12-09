@@ -16,6 +16,8 @@ import TechShopTeam4.com.service.BaseService;
 public class BaseController {
 	@Autowired
 	private BaseService baseService;
+	
+	//trang index
 	@GetMapping(value = {"/", "/{userId}", "/home/{userId}"})
 	public String index(Model model,
 			@PathVariable(value = "userId", required = false) Integer userId) {
@@ -24,27 +26,34 @@ public class BaseController {
 			model.addAttribute("user", baseService.findUserById(userId));
 		return "index";
 	}
+	
+	//chuyen den trang dang nhap
 	@GetMapping(value = "/login")
 	public String login(Model model) {
 		model.addAttribute("user", new User());
 		return "login";
 	}
+	
+	//chuyen den trang register
 	@GetMapping(value = "/register")
 	public String register(Model model) {
 		model.addAttribute("user", new User());
 		return "register";
 	}
+	
+	//xem thong tin chi tiet san pham
 	@GetMapping(value = {"/product/{productId}", "/product/{userId}/{productId}"})
 	public String product(Model model, 
 			@PathVariable(value = "productId", required = false) Integer productId,
 			@PathVariable(value = "userId", required = false) Integer userId) {
-		if(userId != null)
+		if(userId != null) 
 			model.addAttribute("user", baseService.findUserById(userId));
-		model.addAttribute("user", baseService.findUserById(userId));
 		model.addAttribute("images", baseService.findProductImageById(productId));
 		model.addAttribute("product", baseService.findProductById(productId));
 		return "product";
 	}
+	
+	//xem san pham co trong cart
 	@GetMapping(value = {"/cart/{userId}"})
 	public String cart(@PathVariable("userId") int userId,
 			Model model) {
@@ -53,12 +62,16 @@ public class BaseController {
 		model.addAttribute("totalPrice", baseService.totalPriceIncart(baseService.findCartByUserId(userId)));
 		return "cart";
 	}
+	
+	//thong tin ca nhan user
 	@GetMapping(value = {"/profile/{id}"})
 	public String profile(Model model,
 							@PathVariable("id") int id) {
 		model.addAttribute("user", baseService.findUserById(id));
 		return "profile";
 	}
+	
+	//them san pham vao cart
 	@PostMapping(value = "/addToCart")
 	public String addTocart(@RequestParam(value = "userId", required = true) Integer userId, 
 			  				@RequestParam(value = "productId", required = true) Integer productId, 
@@ -68,6 +81,8 @@ public class BaseController {
 		return "redirect:/home/" + userId;
 		
 	}
+	
+	//xu ly register
 	@PostMapping(value = "/doRegister")
 	public String doRegister(@ModelAttribute("User") User user, 
 								Model model) {
@@ -79,6 +94,8 @@ public class BaseController {
 			return "redirect:/home";
 		}		
 	}
+	
+	//xu ly login
 	@PostMapping(value = "/doLogin")
 	public String doLogin(@ModelAttribute("User") User user, 
 								Model model) {
