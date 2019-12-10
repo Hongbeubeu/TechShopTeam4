@@ -22,10 +22,10 @@
 	                            <div class="top_bar_user">
 	                                <div class="user_icon"><img src="<c:url value="/resources/images/user.svg" />" alt=""></div>
 	                                <div><a href="/TechShopTeam4.com/register">Register</a></div>
-	                                <c:if test="${empty user }">
+	                                <c:if test="${empty user || user.id == 0 }">
 	                                	<div><a href="/TechShopTeam4.com/login">Sign in</a></div>
 	                                </c:if>
-	                                <c:if test="${not empty user }">
+	                                <c:if test="${user.id > 0 }">
 	                                	<div><a href="/TechShopTeam4.com/profile/${user.id }">Customer</a></div>
 	                                </c:if>
 	                            </div>
@@ -44,10 +44,10 @@
 	                    <!-- Logo -->
 	                    <div class="col-lg-2 col-sm-3 col-3 order-1">
 	                        <div class="logo_container">
-	                        	<c:if test = "${not empty user }">
+	                        	<c:if test = "${user.id > 0}">
 	                            	<div class="logo"><a href="/TechShopTeam4.com/${user.id }">OneTech</a></div>
 	                            </c:if>
-	                            <c:if test = "${empty user }">
+	                            <c:if test = "${empty user || user.id == 0 }">
 	                            	<div class="logo"><a href="/TechShopTeam4.com/">OneTech</a></div>
 	                            </c:if>
 	                        </div>
@@ -58,7 +58,7 @@
 	                        <div class="header_search">
 	                            <div class="header_search_content">
 	                                <div class="header_search_form_container">
-	                                <c:if test="${not empty user }">
+	                                <c:if test="${user.id > 0 }">
 	                                    <form action="/TechShopTeam4.com/${user.id }" class="header_search_form clearfix">
 	                                    	<input type ="hidden" name = "userId" value = "${user.id }">
 	                                        <input type="search" name = "productName" required="required" class="header_search_input" placeholder="Search for products...">
@@ -73,7 +73,7 @@
 	                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="<c:url value="/resources/images/search.png" />" alt=""></button>
 	                                    </form>
 	                                </c:if>
-	                                <c:if test="${empty user }">
+	                                <c:if test="${empty user || user.id == 0 }">
 	                                    <form action="/TechShopTeam4.com/" class="header_search_form clearfix">
 	                                        <input type="search" name = "productName" required="required" class="header_search_input" placeholder="Search for products...">
 	                                        <div class="custom_dropdown">
@@ -102,10 +102,10 @@
 	                                        <div class="cart_count"><span>0</span></div>
 	                                    </div>
 	                                    <div class="cart_content">
-	                                    	<c:if test ="${not empty user }">
+	                                    	<c:if test ="${user.id > 0 }">
 	                                        	<div class="cart_text"><a href="/TechShopTeam4.com/cart/${user.id }">Cart</a></div>
 											</c:if>	 
-											<c:if test ="${empty user }">
+											<c:if test ="${empty user || user.id == 0}">
 	                                        	<div class="cart_text"><a href="#">Cart</a></div>
 											</c:if>	                                  
 	                                    </div>
@@ -145,10 +145,10 @@
 	
 	                            <div class="main_nav_menu ml-auto">
 	                                <ul class="standard_dropdown main_nav_dropdown">
-	                                	<c:if test ="${not empty user }">
+	                                	<c:if test ="${user.id > 0 }">
 	                                    	<li><a href="/TechShopTeam4.com/${user.id }">Home<i class="fas fa-chevron-down"></i></a></li>
 	                                	</c:if>
-	                                	<c:if test ="${empty user }">
+	                                	<c:if test ="${empty user || user.id == 0 }">
 	                                    	<li><a href="/TechShopTeam4.com/">Home<i class="fas fa-chevron-down"></i></a></li>
 	                                	</c:if>
 	                                </ul>

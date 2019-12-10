@@ -137,11 +137,17 @@ public class BaseController {
 	public String doRegister(@ModelAttribute("User") User user, 
 								Model model) {
 		User tuser = baseService.register(user);
-		if( tuser == null)
-			return "error";
+		if( tuser == null) {
+			if(baseService.findByEmail(user.getEmail()) != null)
+				model.addAttribute("email_error", "email da ton tai");
+			//model.addAttribute("error", "nhap sai thong tin");
+			model.addAttribute("user", new User());
+			if(!user.getPassword().equals(user.getConfirmPassword()))
+				model.addAttribute("password_error", "nhap password khong khop");
+			return "register";
+		}
 		else {
-			model.addAttribute("user", tuser);
-			return "redirect:/home";
+			return "success";
 		}		
 	}
 	
@@ -150,8 +156,11 @@ public class BaseController {
 	public String doLogin(@ModelAttribute("User") User user, 
 								Model model) {
 		User tuser = baseService.login(user);
-		if( tuser == null)
-			return "redirect:/login";
+		if( tuser == null) {
+			model.addAttribute("error", "nhap email hoac mat khau khong dung");
+			model.addAttribute("user", new User());
+			return "login";
+		}
 		else {
 			return "redirect:/" + tuser.getId();
 		}
