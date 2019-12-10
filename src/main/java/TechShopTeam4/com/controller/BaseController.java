@@ -36,6 +36,11 @@ public class BaseController {
 		model.addAttribute("user", new User());
 		return "login";
 	}
+	@GetMapping(value = "/admin/login")
+	public String adminLogin(Model model) {
+		model.addAttribute("user", new User());
+		return "adminLogin";
+	}
 	
 	//chuyen den trang register
 	@GetMapping(value = "/register")

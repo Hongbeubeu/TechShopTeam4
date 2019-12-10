@@ -30,6 +30,14 @@ public class TechShopDAO {
 							);
 	}
 	
+	public void addRoleUser(int userRole) {
+		String sql = "INSERT INTO  user_role "
+				+ "(user_id, role ) "
+				+ "VALUES (?, ?) ";
+		jdbcTemplate.update(sql, userRole, 2);
+				
+	}
+	
 	public User findByEmail(String email) {
 		String sql = "SELECT * FROM user WHERE email = ?";
 		try {

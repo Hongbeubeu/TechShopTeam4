@@ -48,6 +48,8 @@ public class BaseService {
 						user.setPassword(MD5(user.getPassword()));
 						user.setCreateAt(DateTime.setDateToInt());
 						techShopDAO.save(user);
+						int userRole = techShopDAO.findByEmail(user.getEmail()).getId();
+						techShopDAO.addRoleUser(userRole);
 						return user;
 					} catch (NoSuchAlgorithmException e) {
 						return null;
