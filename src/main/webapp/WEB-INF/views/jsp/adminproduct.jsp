@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/resources/backend/images/favicon.png" />">
-    <title>DASHBOARD</title>
+    <title>PRODUCTS</title>
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/backend/node_modules/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/backend/node_modules/perfect-scrollbar/css/perfect-scrollbar.css" />" rel="stylesheet">
@@ -60,85 +60,46 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex no-block">
                                     <div>
                                         <h4 class="card-title m-b-0">Overview</h4>
                                     </div>
-                                </div>
+                                </div>	
                                 <div class="" id="sales-chart" style="height: 355px;">
                                 <div class = "row">
-                                	<div class ="col"><h5>Sales value</h5></div>
-                                	<div class ="col"><h5>Month</h5></div>
+                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Name</h5></div>
+                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Quantity</h5></div>
+                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Price</h5></div>
+                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Option</h5></div>
+                                	<div class ="col"><h5 style="color: #ff0000; font-weight: bold;">Delete</h5></div>
                                 </div>
-                                <div class ="row">
-                                	<div class = "col">120.000.000 vnd</div>
-                                	<div class = "col">1</div>
+                                <div class ="row" style = "padding: 15px">
+                                	<div class = "col">Apple MacBook Air</div>
+                                	<div class = "col">100</div>
+                                	<div class = "col">40.000.000 vnd</div>
+                                	<div class = "col"><button class = "btn btn-primary">Option</button></div>
+                                	<div class = "col"><button class = "btn btn-danger">Delete</button></div>
                                 </div>
-                                <div class ="row">
-                                	<div class = "col">120.000.000 vnd</div>
-                                	<div class = "col">2</div>
+                                 <div class ="row" style="padding: 15px">
+                                	<div class = "col">Apple MacBook Air</div>
+                                	<div class = "col">100</div>
+                                	<div class = "col">40.000.000 vnd</div>
+                                	<div class = "col"><button class = "btn btn-primary">Option</button></div>
+                                	<div class = "col"><button class = "btn btn-danger">Delete</button></div>
                                 </div>
+                            	<div class = "row"><button class = "btn btn-info">Add Product</button></div>
                                 
-                                <div class ="row">
-                                	<div class = "col">120.000.000 vnd</div>
-                                	<div class = "col">3</div>
-                                </div>
-                                <div class ="row">
-                                	<div class = "col">120.000.000 vnd</div>
-                                	<div class = "col">4</div>
-                                </div>
                               
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex m-b-30 no-block">
-                                    <h4 class="card-title m-b-0 align-self-center">Orders</h4>
-                                </div>
-                                <div class ="row">
-	                                <div class ="col">
-	                                	<h5>Order Count</h5>
-	                                </div>
-	                                <div class = "col">
-	                                	<h5>Month</h5>
-	                                </div>
-                                </div>
-                                <div class ="row">
-	                                <div class ="col">
-	                                	5
-	                                </div>
-	                                <div class = "col">
-	                                	1
-	                                </div>
-                                </div>
-                                <div class ="row">
-	                                <div class ="col">
-	                                	6
-	                                </div>
-	                                <div class = "col">
-	                                	2
-	                                </div>
-                                </div>
-                                <div class ="row">
-	                                <div class ="col">
-	                                	9
-	                                </div>
-	                                <div class = "col">
-	                                	3
-	                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
+                </div>
+                </div>
     <jsp:include page="adminfooter.jsp"></jsp:include>
 </body>
 

@@ -27,7 +27,7 @@ public class BaseController {
 			model.addAttribute("user", baseService.findUserById(userId));
 		if(productName != null)
 			model.addAttribute("search", baseService.searchProductByName(productName));
-		return "index";
+		return "admin";
 	}
 	
 	//chuyen den trang dang nhap
