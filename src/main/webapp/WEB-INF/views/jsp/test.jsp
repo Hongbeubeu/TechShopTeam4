@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${product.name }</title>
+        <title>test</title>
         <meta name="description" content="OneTech shop project">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/bootstrap4/bootstrap.min.css" />">
@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/product_styles.css" />">
     </head>
 	<body>
-	<a href = "/TechShopTeam4.com/cart/1">cart</a>
+	${admin.id}
         
     </body>
 </html>

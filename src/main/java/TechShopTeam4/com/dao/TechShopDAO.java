@@ -39,7 +39,9 @@ public class TechShopDAO {
 	}
 	
 	public User findByEmail(String email) {
-		String sql = "SELECT * FROM user WHERE email = ?";
+		String sql = "SELECT * "
+				+ "FROM user "
+				+ "WHERE email = ?";
 		try {
 			User user =  jdbcTemplate.queryForObject(sql, new UserMapper(), email);
 			return user;
@@ -48,8 +50,40 @@ public class TechShopDAO {
 		}
 	}
 	
+	public User findAdminByEmail(String email) {
+		String sql = "SELECT u.id, u.email, u.password, u.phone_number, u.address, u.create_at "
+				+ "FROM user u, role r, user_role ur  "
+				+ "WHERE u.email = ? "
+				+ "AND u.id = ur.user_id "
+				+ "AND ur.role = r.id "
+				+ "AND r.name = ?";
+		try {
+			User admin =  jdbcTemplate.queryForObject(sql, new UserMapper(), email, "ROLE_ADMIN");
+			return admin;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public User findAdminById(int id) {
+		String sql = "SELECT u.id, u.email, u.password, u.phone_number, u.address, u.create_at "
+				+ "FROM user u, role r, user_role ur  "
+				+ "WHERE u.id = ? "
+				+ "AND u.id = ur.user_id "
+				+ "AND ur.role = r.id "
+				+ "AND r.name = ?";
+		try {
+			User admin =  jdbcTemplate.queryForObject(sql, new UserMapper(), id, "ROLE_ADMIN");
+			return admin;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	public User findUserById(int id) {
-		String sql = "SELECT * FROM user WHERE id = ?";
+		String sql = "SELECT * "
+				+ "FROM user "
+				+ "WHERE id = ?";
 		try {
 			User user =  jdbcTemplate.queryForObject(sql, new UserMapper(), id);
 			return user;
@@ -132,7 +166,9 @@ public class TechShopDAO {
 		}
 	}
 	public void deleteCart(int userId, int productId) {
-		String sql = "DELETE FROM cart WHERE customer_id = ? AND product_id = ? ";
+		String sql = "DELETE FROM cart "
+				+ "WHERE customer_id = ? "
+				+ "AND product_id = ? ";
 		jdbcTemplate.update(sql, userId, productId);
 	}
 	public List<Image> findProductImageById(int id){
@@ -170,7 +206,9 @@ public class TechShopDAO {
 				+ "c.status,"
 				+ "l.name,"
 				+ "i.image_path "
-				+ "FROM cart c, product_image i, laptop_description l "
+				+ "FROM cart c, "
+				+ "product_image i, "
+				+ "laptop_description l "
 				+ "WHERE c.customer_id = ? "
 				+ "AND c.status = ? "
 				+ "AND c.product_id = i.product_id "
@@ -216,7 +254,9 @@ public class TechShopDAO {
 	}
 	
 	public void addToOrder(int userId, int totalPrice, int createAt) {
-		String sql = "INSERT INTO `order` (customer_id, total_price, payment_method, status, create_at) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO `order` "
+				+ "(customer_id, total_price, payment_method, status, create_at) "
+				+ "VALUES (?,?,?,?,?)";
 		String paymentMethod = "ttknh";
 		String status = "inorder";
 		jdbcTemplate.update(sql, userId, totalPrice, paymentMethod, status, createAt);

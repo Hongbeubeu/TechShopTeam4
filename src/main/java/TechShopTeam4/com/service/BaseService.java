@@ -23,6 +23,22 @@ public class BaseService {
 	public User findByEmail(String email) {
 		return techShopDAO.findByEmail(email);
 	}
+	
+	public User adminLogin(User	admin) {
+		User tadmin = techShopDAO.findAdminByEmail(admin.getEmail());
+		if(tadmin == null)
+			return null;
+		else
+			try {
+				if(MD5(admin.getPassword()).equals(tadmin.getPassword())) {
+					return tadmin;
+				}else
+					return null;
+			} catch (NoSuchAlgorithmException e) {
+				return null;
+			}
+	}
+	
 	public User login(User user) {
 		User tuser = findByEmail(user.getEmail());
 		if(tuser == null ) 
@@ -96,6 +112,10 @@ public class BaseService {
 	
 	public User findUserById(int id) {
 		return techShopDAO.findUserById(id);
+	}
+	
+	public User findAdminById(int id) {
+		return techShopDAO.findAdminById(id);
 	}
 	
 	public List<Cart> findCartByUserId(int userId) {

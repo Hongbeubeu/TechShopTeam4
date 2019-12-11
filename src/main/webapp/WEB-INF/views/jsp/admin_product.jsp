@@ -33,8 +33,8 @@
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
-    <jsp:include page="adminheader.jsp"></jsp:include>
-    <jsp:include page="adminnavbar.jsp"></jsp:include>
+    <jsp:include page="admin_header.jsp"></jsp:include>
+    <jsp:include page="admin_navbar.jsp"></jsp:include>
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
@@ -100,7 +100,7 @@
                 </div>
                 </div>
                 </div>
-    <jsp:include page="adminfooter.jsp"></jsp:include>
+    <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
 
 </html>

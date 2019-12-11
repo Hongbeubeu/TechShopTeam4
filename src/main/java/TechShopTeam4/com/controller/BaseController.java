@@ -27,7 +27,7 @@ public class BaseController {
 			model.addAttribute("user", baseService.findUserById(userId));
 		if(productName != null)
 			model.addAttribute("search", baseService.searchProductByName(productName));
-		return "admin";
+		return "index"; 
 	}
 	
 	//chuyen den trang dang nhap
@@ -36,12 +36,22 @@ public class BaseController {
 		model.addAttribute("user", new User());
 		return "login";
 	}
-	@GetMapping(value = "/admin/login")
-	public String adminLogin(Model model) {
-		model.addAttribute("user", new User());
-		return "adminLogin";
-	}
 	
+	//xu ly user login
+	@PostMapping(value = "/doLogin")
+	public String doLogin(@ModelAttribute("User") User user, 
+								Model model) {
+		User tuser = baseService.login(user);
+		if( tuser == null) {
+			model.addAttribute("error", "nhap email hoac mat khau khong dung");
+			model.addAttribute("user", new User());
+			return "login";
+		}
+		else {
+			return "redirect:/" + tuser.getId();
+		}
+	}
+
 	//chuyen den trang register
 	@GetMapping(value = "/register")
 	public String register(Model model) {
@@ -156,20 +166,7 @@ public class BaseController {
 		}		
 	}
 	
-	//xu ly login
-	@PostMapping(value = "/doLogin")
-	public String doLogin(@ModelAttribute("User") User user, 
-								Model model) {
-		User tuser = baseService.login(user);
-		if( tuser == null) {
-			model.addAttribute("error", "nhap email hoac mat khau khong dung");
-			model.addAttribute("user", new User());
-			return "login";
-		}
-		else {
-			return "redirect:/" + tuser.getId();
-		}
-	}
+	
 	
 	//log out
 	@GetMapping(value = "/logout")
