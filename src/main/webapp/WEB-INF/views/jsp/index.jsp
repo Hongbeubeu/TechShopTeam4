@@ -39,10 +39,15 @@
 		</tr>
 		<c:forEach var="search" items="${search}">
 			<tr>
-				<td><img width="20%" src="<c:url value="/resources/product_images/${search.imgPath }" />" alt=""></td>
-				<td><a href="/TechShopTeam4.com/product/${search.productId}">${search.name}</a></td>
+				<td><img width="100px" src="<c:url value="/resources/product_images/${search.imgPath }" />" alt=""></td>
+				<c:if test = "${not empty user }">
+					<td><a href="/TechShopTeam4.com/${user.id }/product/${search.productId}">${search.name}</a></td>
+				</c:if>
+				<c:if test = "${empty user }">
+					<td><a href="/TechShopTeam4.com/product/${search.productId}">${search.name}</a></td>
+				</c:if>
 				<td>${search.quantity}</td>
-				<td>${search.price} VND</td>
+				<td>${search.price}</td>
 				<td>
 					<c:if test = "${not empty user }">
 				   		<form action="${addToCart}" method="POST">
@@ -80,11 +85,11 @@
                                             <div class="deals_content">
                                                 <div class="deals_info_line d-flex flex-row justify-content-start">
                                                     <div class="deals_item_category"><a href="#">Laptop</a></div>
-                                                    <div class="deals_item_price_a ml-auto">$ 29999000</div>
+                                                    <div class="deals_item_price_a ml-auto">29.999.000 đ</div>
                                                 </div>
                                                 <div class="deals_info_line d-flex flex-row justify-content-start">
                                                     <div class="deals_item_name">Dell XPS 15 7590</div>
-                                                    <div class="deals_item_price ml-auto">$ 29599000</div>
+                                                    <div class="deals_item_price ml-auto">29.599.000 đ</div>
                                                 </div>
                                                 <div class="available">
                                                     <div class="available_line d-flex flex-row justify-content-start">
@@ -147,9 +152,11 @@
                                                 <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                                     <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="<c:url value="/resources/product_images/${p.imgPath }" />" alt=""></div>
                                                     <div class="product_content">
-                                                        <div class="product_price discount">$ ${p.price }</div>
+                                                        <div class="product_price discount">${p.price }</div>
                                                         <c:if test = "${not empty user }">                                                        
-	                                                        <div class="product_name"><div><a href="/TechShopTeam4.com/product/${user.id }/${p.productId}">${p.name}</a></div></div>
+	                                                        <div class="product_name">
+	                                                        	<div><a href="/TechShopTeam4.com/${user.id }/product/${p.productId}">${p.name}</a></div>
+	                                                       	</div>
 	                                                        <div class="product_extras">
 		                                                        <form action="${addToCart}" method="POST">
 															   		<input type="hidden" name = "quantity" value = "1">

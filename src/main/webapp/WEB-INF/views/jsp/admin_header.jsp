@@ -21,7 +21,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="dashboard.jsp">
+                    <a class="navbar-brand" href="/TechShopTeam4.com/admin/${admin.id }">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -56,15 +56,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-xs-down search-box"> 
-	                        <a class="nav-link hidden-sm-down waves-effect waves-dark" href="">
-	                        	<i class="fa fa-search"></i>
-	                        </a>
-	                        <form class="app-search">
-	                            <input type="text" class="form-control" placeholder="Search & enter"> 
-	                            <a class="srh-btn"><i class="fa fa-times"></i></a>
-	                        </form>
-                        </li>
+                        
                     </ul>
                     <!-- ============================================================== -->
                     <!-- User profile and search -->

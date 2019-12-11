@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import TechShopTeam4.com.entities.Laptop;
+import TechShopTeam4.com.helper.Currency;
 
 public class OneLaptopMapper implements RowMapper<Laptop>{
 	public Laptop mapRow(ResultSet rs, int rowNum) throws SQLException{
@@ -22,7 +23,7 @@ public class OneLaptopMapper implements RowMapper<Laptop>{
 		laptop.setBattery(rs.getString("battery"));
 		laptop.setOperaSystem(rs.getString("opera_system"));
 		laptop.setQuantity(rs.getInt("quantity"));
-		laptop.setPrice(rs.getInt("price"));
+		laptop.setPrice(Currency.formatcurrency(rs.getInt("price")));
 		return laptop;
 	}
 }

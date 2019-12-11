@@ -14,7 +14,7 @@
                     <div class="col-lg-5 offset-lg-4 fill_height">
                         <div class="banner_content">
                             <h1 class="banner_text">new gen of Laptop</h1>
-                            <div class="banner_price">$27990000</div>
+                            <div class="banner_price">27.990.000 đ</div>
                             <div class="banner_product_name">Apple Macbook Pro Touch 2019</div>
                             <div class="button banner_button"><a href="#">Shop Now</a></div>
                         </div>

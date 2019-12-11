@@ -1,3 +1,18 @@
+/*-----------------------------------------------------------*/
+/*
+ * index
+ */
+/*-----------------------------------------------------------*/
+/*
+ *dang nhap, dang ky, dang xuat
+ */
+/*-----------------------------------------------------------*/
+/*
+ * xu ly cac request con lai cua trang web
+ */
+/*-----------------------------------------------------------*/
+
+
 package TechShopTeam4.com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +32,8 @@ public class BaseController {
 	@Autowired
 	private BaseService baseService;
 	
+//index
+/*-----------------------------------------------------------*/
 	//trang index
 	@GetMapping(value = {"/", "/{userId}"})
 	public String index(Model model,
@@ -29,15 +46,17 @@ public class BaseController {
 			model.addAttribute("search", baseService.searchProductByName(productName));
 		return "index"; 
 	}
-	
-	//chuyen den trang dang nhap
+/*-----------------------------------------------------------*/
+//dang nhap, dang ky, dang xuat
+/*-----------------------------------------------------------*/
+	//chuyen den trang login
 	@GetMapping(value = "/login")
 	public String login(Model model) {
 		model.addAttribute("user", new User());
 		return "login";
 	}
 	
-	//xu ly user login
+	//xu ly login
 	@PostMapping(value = "/doLogin")
 	public String doLogin(@ModelAttribute("User") User user, 
 								Model model) {
@@ -59,8 +78,36 @@ public class BaseController {
 		return "register";
 	}
 	
+	//xu ly register
+	@PostMapping(value = "/doRegister")
+	public String doRegister(@ModelAttribute("User") User user, 
+								Model model) {
+		User tuser = baseService.register(user);
+		if( tuser == null) {
+			if(baseService.findByEmail(user.getEmail()) != null)
+				model.addAttribute("email_error", "email da ton tai");
+			//model.addAttribute("error", "nhap sai thong tin");
+			model.addAttribute("user", new User());
+			if(!user.getPassword().equals(user.getConfirmPassword()))
+				model.addAttribute("password_error", "nhap password khong khop");
+			return "register";
+		}
+		else {
+			return "success";
+		}		
+	}
+		
+	//log out
+	@GetMapping(value = "/logout")
+	public  String logout() {
+		return "redirect:/";
+	}
+	
+/*-----------------------------------------------------------*/
+//xu ly cac request con lai cua trang web
+/*-----------------------------------------------------------*/
 	//xem thong tin chi tiet san pham
-	@GetMapping(value = {"/product/{productId}", "/product/{userId}/{productId}"})
+	@GetMapping(value = {"/product/{productId}", "/{userId}/product/{productId}"})
 	public String product(Model model, 
 			@PathVariable(value = "productId", required = false) Integer productId,
 			@PathVariable(value = "userId", required = false) Integer userId) {
@@ -147,30 +194,5 @@ public class BaseController {
 		model.addAttribute("userId", userId);
 		return "purchased";
 	}
-	//xu ly register
-	@PostMapping(value = "/doRegister")
-	public String doRegister(@ModelAttribute("User") User user, 
-								Model model) {
-		User tuser = baseService.register(user);
-		if( tuser == null) {
-			if(baseService.findByEmail(user.getEmail()) != null)
-				model.addAttribute("email_error", "email da ton tai");
-			//model.addAttribute("error", "nhap sai thong tin");
-			model.addAttribute("user", new User());
-			if(!user.getPassword().equals(user.getConfirmPassword()))
-				model.addAttribute("password_error", "nhap password khong khop");
-			return "register";
-		}
-		else {
-			return "success";
-		}		
-	}
-	
-	
-	
-	//log out
-	@GetMapping(value = "/logout")
-	public  String logout() {
-		return "redirect:/";
-	}
+/*-----------------------------------------------------------*/
 }

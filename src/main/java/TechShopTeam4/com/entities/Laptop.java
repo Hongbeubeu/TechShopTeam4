@@ -14,7 +14,7 @@ public class Laptop {
 	private String battery;
 	private String operaSystem;
 	private int quantity;
-	private int price;
+	private String price;
 	private String imgPath;
 	
 	
@@ -24,10 +24,10 @@ public class Laptop {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getImgPath() {

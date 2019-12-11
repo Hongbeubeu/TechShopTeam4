@@ -21,8 +21,8 @@
         	<h1 class= "product_name">${product.name }</h1><br>
         	<div class ="row">
 	        	<c:forEach var="image" items="${images }">
-	        		<div class ="col" style = "width: 150px">
-	        			<img src="<c:url value="/resources/product_images/${image.imgPath }" />" alt="">
+	        		<div class ="col" >
+	        			<img style = "width: 600px; height: 400px; " src="<c:url value="/resources/product_images/${image.imgPath }" />" alt="">
 	        		</div>
 	        	</c:forEach>
         	</div>

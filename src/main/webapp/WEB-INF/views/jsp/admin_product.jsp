@@ -45,11 +45,7 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Dashboard</h3>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
+                        <h3 class="text-themecolor">PRODUCTS</h3>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -61,40 +57,39 @@
                 <div class="row">
                     <!-- Column -->
                     <div class="col-lg-12">
+                    <div class="card">
+                    	<div class="card-body" style="overflow:auto;">
+	                    	<div class="d-flex no-block">
+	                            <div>
+	                                <h4 class="card-title m-b-0">Overview</h4>
+	                            </div>
+	                        </div>	
+	                    	<div class = "row">
+                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Name</h5></div>
+                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Quantity</h5></div>
+                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Price</h5></div>
+                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Option</h5></div>
+                               	<div class ="col"><h5 style="color: #ff0000; font-weight: bold;">Delete</h5></div>
+                               </div>
+	                    	</div>
+	                    </div>
                         <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div>
-                                        <h4 class="card-title m-b-0">Overview</h4>
-                                    </div>
-                                </div>	
+                            <div class="card-body" style="overflow:auto;">
+                               
                                 <div class="" id="sales-chart" style="height: 355px;">
-                                <div class = "row">
-                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Name</h5></div>
-                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Quantity</h5></div>
-                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Price</h5></div>
-                                	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Option</h5></div>
-                                	<div class ="col"><h5 style="color: #ff0000; font-weight: bold;">Delete</h5></div>
-                                </div>
-                                <div class ="row" style = "padding: 15px">
-                                	<div class = "col">Apple MacBook Air</div>
-                                	<div class = "col">100</div>
-                                	<div class = "col">40.000.000 vnd</div>
-                                	<div class = "col"><button class = "btn btn-primary">Option</button></div>
-                                	<div class = "col"><button class = "btn btn-danger">Delete</button></div>
-                                </div>
-                                 <div class ="row" style="padding: 15px">
-                                	<div class = "col">Apple MacBook Air</div>
-                                	<div class = "col">100</div>
-                                	<div class = "col">40.000.000 vnd</div>
-                                	<div class = "col"><button class = "btn btn-primary">Option</button></div>
-                                	<div class = "col"><button class = "btn btn-danger">Delete</button></div>
-                                </div>
-                            	<div class = "row"><button class = "btn btn-info">Add Product</button></div>
-                                
-                              
+	                                
+	                                <c:forEach var = "product" items = "${products }">
+										<div class ="row" style = "padding: 15px">
+		                                	<div class = "col">${product.name }</div>
+		                                	<div class = "col">${product.quantity }</div>
+		                                	<div class = "col">${product.price }</div>
+		                                	<div class = "col"><button class = "btn btn-primary">Option</button></div>
+		                                	<div class = "col"><button class = "btn btn-danger">Delete</button></div>
+		                                </div>
+	                                </c:forEach>
                                 </div>
                             </div>
+                            <div class = "row" style = "padding: 15px"><button class = "btn btn-info">Add Product</button></div>
                         </div>
                     </div>
                 </div>

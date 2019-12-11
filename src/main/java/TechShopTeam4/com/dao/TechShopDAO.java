@@ -306,4 +306,16 @@ public class TechShopDAO {
 			return null;
 		}
 	}
+	
+	public List<ManageProduct> findAllManageProduct(){
+		String sql = "SELECT ld.product_id, p.quantity, p.price, ld.name "
+				+ "FROM product p,laptop_description ld "
+				+ "WHERE p.id = ld.product_id ";
+		try {
+			List<ManageProduct> product = jdbcTemplate.query(sql, new ManageProductMapper());
+			return product;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }

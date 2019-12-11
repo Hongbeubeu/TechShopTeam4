@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/product_styles.css" />">
     </head>
 	<body>
-	${admin.id}
+	${month}
         
     </body>
 </html>

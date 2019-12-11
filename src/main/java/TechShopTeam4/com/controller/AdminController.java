@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import TechShopTeam4.com.entities.*;
+import TechShopTeam4.com.helper.*;
 import TechShopTeam4.com.service.BaseService;
 
 @Controller
@@ -42,10 +43,36 @@ public class AdminController {
 		}
 	}
 	
+	//dashboard
 	@GetMapping(value = {"/{adminId}"})
 	public String admin(Model model,
 			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		
 		model.addAttribute("admin", baseService.findAdminById(adminId));
 		return "admin";
+	}
+	
+	//manage products
+	@GetMapping(value = "/products/{adminId}")
+	public String products(Model model,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("products", baseService.findAllManageProduct());
+		return "admin_product";
+	}
+	
+	//manage user
+	@GetMapping(value = "/users/{adminId}")
+	public String users(Model model,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		return "admin_user";
+	}
+	
+	
+	@GetMapping(value = "/test")
+	public String test(Model model) {
+		model.addAttribute("month", Currency.formatcurrency(1111));
+		return "test";
 	}
 }
