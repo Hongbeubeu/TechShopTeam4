@@ -75,24 +75,16 @@
 	                                <div class = "row">
 	                                	<div class ="col"><h5>Sales value</h5></div>
 	                                	<div class ="col"><h5>Month</h5></div>
+	                                	<div class ="col"><h5>Year</h5></div>
 	                                </div>
-	                                <div class ="row">
-	                                	<div class = "col">120.000.000 vnd</div>
-	                                	<div class = "col">1</div>
-	                                </div>
-	                                <div class ="row">
-	                                	<div class = "col">120.000.000 vnd</div>
-	                                	<div class = "col">2</div>
-	                                </div>
-	                                
-	                                <div class ="row">
-	                                	<div class = "col">120.000.000 vnd</div>
-	                                	<div class = "col">3</div>
-	                                </div>
-	                                <div class ="row">
-	                                	<div class = "col">120.000.000 vnd</div>
-	                                	<div class = "col">4</div>
-	                                </div>
+	                                <% int i=0; %>
+	                                <c:forEach var="sale" items = "${sales }">
+		                                <div class ="row">
+		                                	<div style ="padding: 3px" class = "col">${sale.price }</div>
+		                                	<div style ="padding: 3px" class = "col"><%=++i %></div>
+		                                	<div style ="padding: 3px" class = "col">2019</div>
+		                                </div>
+	                                </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -112,30 +104,17 @@
 	                                	<h5>Month</h5>
 	                                </div>
                                 </div>
+                                <% int j = 0; %>
+                                <c:forEach var="count" items= "${countOrders }">
                                 <div class ="row">
 	                                <div class ="col">
-	                                	5
+	                                	${count.id }
 	                                </div>
 	                                <div class = "col">
-	                                	1
+	                                	<%= ++j %>
 	                                </div>
                                 </div>
-                                <div class ="row">
-	                                <div class ="col">
-	                                	6
-	                                </div>
-	                                <div class = "col">
-	                                	2
-	                                </div>
-                                </div>
-                                <div class ="row">
-	                                <div class ="col">
-	                                	9
-	                                </div>
-	                                <div class = "col">
-	                                	3
-	                                </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

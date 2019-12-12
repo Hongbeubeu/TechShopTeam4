@@ -20,12 +20,11 @@
 	                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="<c:url value="/resources/images/mail.png" />" alt=""></div><a href="mailto:hongbeubeu@gmail.com">hongbeubeu@gmail.com</a></div>
 	                        <div class="top_bar_content ml-auto">
 	                            <div class="top_bar_user">
-	                                <div class="user_icon"><img src="<c:url value="/resources/images/user.svg" />" alt=""></div>
-	                                <div><a href="/TechShopTeam4.com/register">Register</a></div>
-	                                <c:if test="${empty user || user.id == 0 }">
-	                                	<div><a href="/TechShopTeam4.com/login">Sign in</a></div>
-	                                </c:if>
+	                                
+	                                <div><a href="/TechShopTeam4.com/register">Register &nbsp;</a></div>
+	                                <div><a href="/TechShopTeam4.com/login">Sign in &nbsp;</a></div>
 	                                <c:if test="${user.id > 0 }">
+	                                	<div class="user_icon"><img src="<c:url value="/resources/images/user.svg" />" alt=""></div>
 	                                	<div><a href="/TechShopTeam4.com/profile/${user.id }">${user.email }</a></div>
 	                                </c:if>
 	                            </div>

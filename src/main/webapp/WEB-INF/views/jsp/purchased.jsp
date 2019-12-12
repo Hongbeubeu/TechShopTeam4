@@ -39,8 +39,8 @@
 		<c:forEach var="purchased" items="${purchased}">
 			<tr>
 				<td>${purchased.orderId }</td>
-				<td><img width="100px" src="<c:url value="/resources/product_images/${purchased.imgPath }" />" alt=""></td>
-				<td>${purchased.name}</td>
+				<td><img width="100px" height = "70px" src="<c:url value="/resources/product_images/${purchased.imgPath }" />" alt=""></td>
+				<td><a style="padding: 20px" href="/TechShopTeam4.com/product/${user.id }/${purchased.productId}">${purchased.name}</a></td>
 				<td>${purchased.quantity}</td>
 				<td>${purchased.price}</td>
 				<td>${purchased.status}</td>

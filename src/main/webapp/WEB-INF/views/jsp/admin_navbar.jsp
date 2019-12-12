@@ -35,6 +35,12 @@
 	                        	<span class="hide-menu">Users</span>
 	                        </a>
                         </li>
+                        <li> 
+                        	<a class="waves-effect waves-dark" href="/TechShopTeam4.com/admin/users/${admin.id }" aria-expanded="false">
+	                        	<i class="fa fa-table"></i>
+	                        	<span class="hide-menu">Orders</span>
+	                        </a>
+                        </li>
                     </ul>    
                 </nav>
                 <!-- End Sidebar navigation -->

@@ -31,7 +31,8 @@
                             		</c:if>
                                     <div class="contact_form_button">
                                         <button type="submit" class="button contact_submit_button">Login</button><br>
-                                         <a href="/TechShopTeam4.com/register">Register</a>
+                                         <a href="/TechShopTeam4.com/register">Register</a><br>
+                                         <a href="/TechShopTeam4.com/admin/login">Admin Login</a>
                                     </div>
                                 </form:form>
                             </div>

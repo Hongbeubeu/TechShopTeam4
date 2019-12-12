@@ -49,6 +49,8 @@ public class AdminController {
 			@PathVariable(value = "adminId", required = true) Integer adminId) {
 		
 		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("sales", baseService.findSale());
+		model.addAttribute("countOrders", baseService.countOrder());
 		return "admin";
 	}
 	

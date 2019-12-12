@@ -46,6 +46,7 @@
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h3 class="text-themecolor">PRODUCTS</h3>
+                        <div class = "row" style = "padding: 15px"><button class = "btn btn-info">Add Product</button></div>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -89,12 +90,11 @@
 	                                </c:forEach>
                                 </div>
                             </div>
-                            <div class = "row" style = "padding: 15px"><button class = "btn btn-info">Add Product</button></div>
                         </div>
                     </div>
                 </div>
                 </div>
-                </div>
+                
     <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
 

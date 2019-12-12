@@ -10,8 +10,8 @@ public class OrderMapper implements RowMapper<Order>{
 	public Order mapRow(ResultSet rs, int rowNum) throws SQLException{
 		Order order = new Order();
 		order.setId(rs.getInt("id"));
-		order.setTotalPrice(rs.getInt("total_price"));
-		order.setStatus(rs.getString("status"));
+		//order.setTotalPrice(rs.getInt("total_price"));
+		//order.setStatus(rs.getString("status"));
 		return order;
 	}
 }

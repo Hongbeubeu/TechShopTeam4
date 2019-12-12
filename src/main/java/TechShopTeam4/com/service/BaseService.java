@@ -3,6 +3,7 @@ package TechShopTeam4.com.service;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -158,6 +159,34 @@ public class BaseService {
 	
 	public List<ManageProduct> findAllManageProduct(){
 		return techShopDAO.findAllManageProduct();
+	}
+	
+	public List<Sale> findSale(){
+		List<Sale> sale = new ArrayList<Sale>();
+		for(int month = 1; month <= 12 ; month++) {
+			Sale tsale = techShopDAO.findSaleByMonth(month);
+			if(tsale == null) {
+				Sale usale = new Sale();
+				usale.setPrice("0 đ");
+				sale.add(usale);
+			}else	
+				sale.add(tsale);
+		}
+		return sale;
+	}
+	
+	public List<Order> countOrder(){
+		List<Order> count = new ArrayList<Order>();
+		for(int month = 1; month <= 12; month ++) {
+			Order order = techShopDAO.countOrder(month);
+			if(order == null) {
+				Order torder = new Order();
+				torder.setId(0);
+				count.add(torder);
+			}else
+				count.add(order);
+		}
+		return count;
 	}
 	
 	private boolean checkEmail(String email) {

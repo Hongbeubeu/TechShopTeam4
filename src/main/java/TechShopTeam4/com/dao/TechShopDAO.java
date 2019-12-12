@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import TechShopTeam4.com.entities.*;
+import TechShopTeam4.com.helper.DateTime;
 import TechShopTeam4.com.mapper.*;
 
 @Repository
@@ -255,11 +256,11 @@ public class TechShopDAO {
 	
 	public void addToOrder(int userId, int totalPrice, int createAt) {
 		String sql = "INSERT INTO `order` "
-				+ "(customer_id, total_price, payment_method, status, create_at) "
-				+ "VALUES (?,?,?,?,?)";
+				+ "(customer_id, total_price, payment_method, status, create_at, month) "
+				+ "VALUES (?,?,?,?,?,?)";
 		String paymentMethod = "ttknh";
 		String status = "inorder";
-		jdbcTemplate.update(sql, userId, totalPrice, paymentMethod, status, createAt);
+		jdbcTemplate.update(sql, userId, totalPrice, paymentMethod, status, createAt, DateTime.getMonth(DateTime.setIntToDate(createAt)));
 	}
 	
 	public Order findOrderIdByCreateAt(int createAt) {
@@ -323,4 +324,31 @@ public class TechShopDAO {
 			return null;
 		}
 	}
+	
+	public Sale findSaleByMonth(int month){
+		String sql = "SELECT SUM(total_price) total_price "
+				+ "FROM `order` "
+				+ "WHERE month = ? "
+				+ "GROUP BY month";
+		try {
+			Sale sale = jdbcTemplate.queryForObject(sql, new SaleMapper(), month);
+			return sale;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public Order countOrder(int month){
+		String sql = "SELECT count(id) id "
+				+ "FROM `order` "
+				+ "WHERE month = ? "
+				+ "GROUP BY month";
+		try {
+			Order count = jdbcTemplate.queryForObject(sql, new OrderMapper(), month);
+			return count;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 }
