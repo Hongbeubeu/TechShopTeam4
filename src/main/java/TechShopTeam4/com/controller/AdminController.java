@@ -72,7 +72,7 @@ public class AdminController {
 	
 	@GetMapping(value = "/test")
 	public String test(Model model) {
-		model.addAttribute("month", Currency.formatcurrency(1111));
+		model.addAttribute("month", Currency.formatCurrency(1111));
 		return "test";
 	}
 }

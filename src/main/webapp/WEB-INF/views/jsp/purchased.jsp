@@ -1,4 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>Purchased</title>
@@ -26,15 +28,23 @@
 	<br>
 	<table class="table table-hover">
 		<tr>
-			<th>Id</th>
+			<th>Order Id</th>
+			<th>Product Image</th>
+			<th>Product Name</th>
+			<th>Quantity</th>
 			<th>Price</th>
 			<th>Status</th>
+			<th>Order Date</th>
 		</tr>
 		<c:forEach var="purchased" items="${purchased}">
 			<tr>
-				<td>${purchased.id }</td>
-				<td>${purchased.totalPrice} VND</td>
+				<td>${purchased.orderId }</td>
+				<td><img width="100px" src="<c:url value="/resources/product_images/${purchased.imgPath }" />" alt=""></td>
+				<td>${purchased.name}</td>
+				<td>${purchased.quantity}</td>
+				<td>${purchased.price}</td>
 				<td>${purchased.status}</td>
+				<td>${purchased.date}</td>
 			</tr>
 		</c:forEach>		
 	</table>

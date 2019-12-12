@@ -24,7 +24,6 @@
                             <div class="contact_form_container">
                                 <div class="contact_form_title">Pay</div>
                                 <form:form action="${doPay }" id="contact_form" method="POST" modelAttribute="delivery">                                                                          
-                                    <form:input path = "orderId" type ="hidden" value = "${orderId }"/>
                                     <form:input path="firstName" type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="First Name" required="required" data-error="First Name is required."/><br/>
                                     <form:input path="lastName" type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="Last Name" required="required" data-error="Last Name is required."/><br/>
                                     <form:input path="address" type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="Address" required="required" data-error="Address is required."/><br/>

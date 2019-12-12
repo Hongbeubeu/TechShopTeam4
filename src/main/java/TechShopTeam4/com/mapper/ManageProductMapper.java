@@ -12,7 +12,7 @@ public class ManageProductMapper implements RowMapper<ManageProduct>{
 		ManageProduct product = new ManageProduct();
 		product.setId(rs.getInt("product_id"));
 		product.setName(rs.getString("name"));
-		product.setPrice(Currency.formatcurrency(rs.getInt("price")));
+		product.setPrice(Currency.formatCurrency(rs.getInt("price")));
 		product.setQuantity(rs.getInt("quantity"));
 		return product;
 	}

@@ -26,7 +26,7 @@
 	                                	<div><a href="/TechShopTeam4.com/login">Sign in</a></div>
 	                                </c:if>
 	                                <c:if test="${user.id > 0 }">
-	                                	<div><a href="/TechShopTeam4.com/profile/${user.id }">Customer</a></div>
+	                                	<div><a href="/TechShopTeam4.com/profile/${user.id }">${user.email }</a></div>
 	                                </c:if>
 	                            </div>
 	                        </div>

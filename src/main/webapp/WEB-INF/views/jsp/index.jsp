@@ -41,7 +41,7 @@
 			<tr>
 				<td><img width="100px" src="<c:url value="/resources/product_images/${search.imgPath }" />" alt=""></td>
 				<c:if test = "${not empty user }">
-					<td><a href="/TechShopTeam4.com/${user.id }/product/${search.productId}">${search.name}</a></td>
+					<td><a href="/TechShopTeam4.com/product/${user.id }/${search.productId}">${search.name}</a></td>
 				</c:if>
 				<c:if test = "${empty user }">
 					<td><a href="/TechShopTeam4.com/product/${search.productId}">${search.name}</a></td>
@@ -51,9 +51,9 @@
 				<td>
 					<c:if test = "${not empty user }">
 				   		<form action="${addToCart}" method="POST">
-					   		<input type="hidden" name = "quantity" value = "1">
+					   		<input type="hidden" value="1" name = "quantity">
 					   		<input type="hidden" value="${user.id }" name = "userId">
-					   		<input type="hidden" value="${search.price }" name = "price">
+					   		<input type="hidden" value="${search.intPrice }" name = "price">
 					   		<input type="hidden" value="${search.productId }" name = "productId">
 			           		<button class="btn btn-primary">Add to Cart</button>
 		          	 	</form>
@@ -155,13 +155,13 @@
                                                         <div class="product_price discount">${p.price }</div>
                                                         <c:if test = "${not empty user }">                                                        
 	                                                        <div class="product_name">
-	                                                        	<div><a href="/TechShopTeam4.com/${user.id }/product/${p.productId}">${p.name}</a></div>
+	                                                        	<div><a href="/TechShopTeam4.com/product/${user.id }/${p.productId}">${p.name}</a></div>
 	                                                       	</div>
 	                                                        <div class="product_extras">
 		                                                        <form action="${addToCart}" method="POST">
 															   		<input type="hidden" name = "quantity" value = "1">
 															   		<input type="hidden" value="${user.id }" name = "userId">
-															   		<input type="hidden" value="${p.price }" name = "price">
+															   		<input type="hidden" value="${p.intPrice }" name = "price">
 															   		<input type="hidden" value="${p.productId }" name = "productId">
 													           		<button class="product_cart_button">Add to Cart</button>
 													           </form>

@@ -107,7 +107,7 @@ public class BaseController {
 //xu ly cac request con lai cua trang web
 /*-----------------------------------------------------------*/
 	//xem thong tin chi tiet san pham
-	@GetMapping(value = {"/product/{productId}", "/{userId}/product/{productId}"})
+	@GetMapping(value = {"/product/{productId}", "/product/{userId}/{productId}"})
 	public String product(Model model, 
 			@PathVariable(value = "productId", required = false) Integer productId,
 			@PathVariable(value = "userId", required = false) Integer userId) {
@@ -138,11 +138,12 @@ public class BaseController {
 	
 	//them san pham vao cart
 	@PostMapping(value = "/addToCart")
-	public String addTocart(@RequestParam(value = "userId", required = true) Integer userId, 
+	public String addToCart(@RequestParam(value = "userId", required = true) Integer userId, 
 			  				@RequestParam(value = "productId", required = true) Integer productId, 
 			  				@RequestParam(value = "quantity", required = true) Integer quantity,
 			  				@RequestParam(value = "price", required = true) Integer price,
 			  				Model model) {
+		
 		if(quantity > baseService.findProductById(productId).getQuantity()){
 			model.addAttribute("error", "so luong san pham trong kho it hon so luong khach yeu cau");
 			return "error";
@@ -166,12 +167,10 @@ public class BaseController {
 	}
 	
 	//thanh toan
-	@PostMapping(value = "/pay/{userId}")
+	@GetMapping(value = "/pay/{userId}")
 	public String pay(@PathVariable(value = "userId", required = true) Integer userId,
 			Model model) {
-		model.addAttribute("userId", userId);
 		model.addAttribute("user", baseService.findUserById(userId));
-		model.addAttribute("orderId", baseService.addToOrder(userId));
 		model.addAttribute("delivery", new Delivery());
 		return "pay";
 	}
@@ -181,8 +180,11 @@ public class BaseController {
 	public String doPay(@ModelAttribute("delivery") Delivery delivery,
 			@PathVariable(value = "userId", required = true) Integer userId,
 			Model model) {
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", baseService.findUserById(userId));
+		delivery.setOrderId(baseService.addToOrder(userId));
 		baseService.fillFormDelivery(delivery);
-		return "redirect:/" + userId;
+		return "redirect:/profile/" + userId;
 	}
 	
 	//purchased

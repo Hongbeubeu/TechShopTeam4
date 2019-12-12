@@ -152,7 +152,7 @@ public class BaseService {
 		techShopDAO.fillFormDelivery(delivery, DateTime.setDateToInt());
 	}
 	
-	public List<Order> findOrderByUserId(int userId){
+	public List<Purchased> findOrderByUserId(int userId){
 		return techShopDAO.findOrderByUserId(userId);
 	}
 	

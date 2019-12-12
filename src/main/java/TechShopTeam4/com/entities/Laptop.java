@@ -15,9 +15,16 @@ public class Laptop {
 	private String operaSystem;
 	private int quantity;
 	private String price;
+	private int IntPrice;
 	private String imgPath;
 	
 	
+	public int getIntPrice() {
+		return IntPrice;
+	}
+	public void setIntPrice(int intPrice) {
+		IntPrice = intPrice;
+	}
 	public int getQuantity() {
 		return quantity;
 	}

@@ -295,13 +295,18 @@ public class TechShopDAO {
 				createAt);
 	}
 	
-	public List<Order> findOrderByUserId(int userId){
-		String sql = "SELECT id, total_price, status "
-				+ "FROM `order` "
-				+ "WHERE customer_id = ? ";
+	public List<Purchased> findOrderByUserId(int userId){
+		String sql = "SELECT o.id, o.status, od.product_id, od.quantity, od.create_at, ld.name, p.price , pi.image_path "
+				+ "FROM `order` o, `order_detail` od, `laptop_description` ld, `product_image` pi, `product` p "
+				+ "WHERE o.customer_id = ? "
+				+ "AND od.product_id = pi.product_id "
+				+ "AND p.id = od.product_id "
+				+ "AND od.product_id = ld.product_id "
+				+ "AND o.id = od.order_id "
+				+ "GROUP BY od.product_id";
 		try {
-			List<Order> order = jdbcTemplate.query(sql, new OrderMapper(), userId);
-			return order;
+			List<Purchased> purchased = jdbcTemplate.query(sql, new PurchasedMapper(), userId);
+			return purchased;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

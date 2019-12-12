@@ -50,7 +50,7 @@
 		<div class = "col"></div>
 		<div class = "col"></div>
 		<div class = "col">
-		<form action="${pay}" method = "POST">
+		<form action="${pay}" method = "GET">
 			<button class="btn btn-primary button" style="width:100%">Pay</button>
 		</form>
 		</div>
