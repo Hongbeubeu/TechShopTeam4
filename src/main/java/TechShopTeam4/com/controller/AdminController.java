@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import TechShopTeam4.com.entities.*;
-import TechShopTeam4.com.helper.*;
+//import TechShopTeam4.com.helper.*;
 import TechShopTeam4.com.service.BaseService;
 
 @Controller
@@ -71,10 +71,44 @@ public class AdminController {
 		return "admin_user";
 	}
 	
-	
+	/*
 	@GetMapping(value = "/test")
 	public String test(Model model) {
 		model.addAttribute("month", Currency.formatCurrency(1111));
-		return "test";
+		model.addAttribute("product", new General());
+		return "add_product_form_3";
+	}
+	*/
+	@GetMapping(value = "/direct/{adminId}")
+	public String direct(Model model,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("product", new General());
+		return "add_product_form_1";
+	}
+	@PostMapping(value = "/addProduct/{adminId}")
+	public String addProduct(Model model,
+			@PathVariable(value = "adminId", required = true) Integer adminId,
+			@ModelAttribute General product) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("product", product);
+		if(product.getBrand() == null) {
+			model.addAttribute("brand", baseService.findBrandByType(product.getType()));
+			return "add_product_form_2";
+		}
+		if(product.getType().equals("laptop"))
+			return "add_product_form_3"; 
+		else
+			return "add_product_form_1";
+	}
+	
+	@PostMapping(value = "/add/{adminId}")
+	public String add(Model model,
+			@PathVariable(value = "adminId", required = true) Integer adminId,
+			@ModelAttribute General product) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("product_id",baseService.addProduct(product));
+		return "add_product_image";
+		
 	}
 }

@@ -351,4 +351,88 @@ public class TechShopDAO {
 		}
 	}
 	
+	public List<Brand> findBrandByType(String type){
+		String sql = "SELECT c1.name "
+				+ "FROM category c1, category c2 "
+				+ "WHERE c1.parent_id = c2.id "
+				+ "AND c2.name = ?";
+		try {
+			List<Brand> brand = jdbcTemplate.query(sql, new BrandMapper(), type);
+			return brand;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public int findParent(String brand, String type) {
+		String sql = "SELECT c2.id "
+				+ "FROM `category` c1, `category` c2 "
+				+ "WHERE c1.id = c2.parent_id "
+				+ "AND c1.name = ? "
+				+ "AND c2.name = ? ";
+		try {
+			NumberInt inte = jdbcTemplate.queryForObject(sql,new NumberIntMapper(), type, brand);
+			return inte.getNum();
+		}catch (EmptyResultDataAccessException e) {
+			return 0;
+		}		
+	}
+	
+	public void addProductToCategory(String name, int parentId, int date) {
+		String sql = "INSERT INTO `category` "
+				+ "(name, parent_id,create_at) "
+				+ "VALUES (?,?,?) ";
+		jdbcTemplate.update(sql, name, parentId, date);
+	}
+	
+	public int findProductByCreatAt(int date) {
+		String sql = "SELECT id "
+				+ "FROM `category` "
+				+ "WHERE create_at = ?";
+		try {
+			NumberInt inte = jdbcTemplate.queryForObject(sql, new NumberIntMapper(), date);
+			return inte.getNum();
+		} catch (EmptyResultDataAccessException e) {
+			return 0;
+		}
+	}
+	
+	public void addProductToProduct(int id, int desId, int quantity,int price,int date ) {
+		String sql = "INSERT INTO `product` "
+				+ "(id, description_id, quantity, price, create_at) "
+				+ "VALUES (?,?,?,?,?) ";
+		jdbcTemplate.update(sql, id, desId, quantity, price, date);
+	}
+	
+	public void addLaptopDescription(int id, General product, int date) {
+		String sql = "INSERT INTO `laptop_description` "
+				+ "(product_id, "
+				+ "name, "
+				+ "chip, "
+				+ "ram, "
+				+ "vga, "
+				+ "display, "
+				+ "camera, "
+				+ "hard_disk, "
+				+ "keyboard, "
+				+ "port, "
+				+ "battery, "
+				+ "opera_system, "
+				+ "create_at) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		jdbcTemplate.update(sql,
+				id,
+				product.getName(),
+				product.getChip(),
+				product.getRam(),
+				product.getVga(),
+				product.getDisplay(),
+				product.getCamera(),
+				product.getHardDisk(),
+				product.getKeyboard(),
+				product.getPort(),
+				product.getBattery(),
+				product.getOperaSystem(),
+				date);
+	}
 }

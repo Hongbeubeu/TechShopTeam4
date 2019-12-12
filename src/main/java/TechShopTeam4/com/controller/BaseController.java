@@ -44,7 +44,7 @@ public class BaseController {
 			model.addAttribute("user", baseService.findUserById(userId));
 		if(productName != null)
 			model.addAttribute("search", baseService.searchProductByName(productName));
-		return "index"; 
+		return "add_product_form"; 
 	}
 /*-----------------------------------------------------------*/
 //dang nhap, dang ky, dang xuat

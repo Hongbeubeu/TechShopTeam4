@@ -189,6 +189,32 @@ public class BaseService {
 		return count;
 	}
 	
+	public List<Brand> findBrandByType(String type){
+		return techShopDAO.findBrandByType(type);
+	}
+	
+	public int addProduct(General product) {
+		int date = DateTime.setDateToInt();
+		int parentId = techShopDAO.findParent(product.getBrand(), product.getType());
+		techShopDAO.addProductToCategory(product.getName(), parentId, date);
+		int id = techShopDAO.findProductByCreatAt(date);
+		int desId = 0;
+		if(product.getType().equals("laptop")) {
+			desId = 1;
+			techShopDAO.addProductToProduct(id, desId, product.getQuantity(), product.getPrice(), date );
+			techShopDAO.addLaptopDescription(id, product, date);	
+		}else if (product.getType().equals("camera")) {
+			desId = 2;
+			techShopDAO.addProductToProduct(id, desId, product.getQuantity(), product.getPrice(), date );
+			//techShopDAO.addCameraDescription(id, product, date);	
+		}else {
+			desId = 3;
+			techShopDAO.addProductToProduct(id, desId, product.getQuantity(), product.getPrice(), date );
+			//techShopDAO.addSmartPhoneDescription(id, product, date);	
+		}
+		return id;
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

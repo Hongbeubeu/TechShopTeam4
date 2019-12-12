@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/resources/backend/images/favicon.png" />">
-    <title>PRODUCTS</title>
+    <title>ADD PRODUCT</title>
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/backend/node_modules/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/backend/node_modules/perfect-scrollbar/css/perfect-scrollbar.css" />" rel="stylesheet">
@@ -33,6 +33,7 @@
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
+	<c:url value = "/admin/addProduct/${admin.id }" var="addProduct"/>
     <jsp:include page="admin_header.jsp"></jsp:include>
     <jsp:include page="admin_navbar.jsp"></jsp:include>
         <div class="page-wrapper">
@@ -45,8 +46,7 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">PRODUCTS</h3>
-                       	<div class = "row" style = "padding: 15px"><a href="/TechShopTeam4.com/admin/direct/${admin.id }"><button class = "btn btn-info">Add Product</button></a></div></div>
+                        <h3 class="text-themecolor">ADD PRODUCT</h3>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -58,42 +58,36 @@
                 <div class="row">
                     <!-- Column -->
                     <div class="col-lg-12">
-                    <div class="card">
-                    	<div class="card-body" style="overflow:auto;">
-	                    	<div class="d-flex no-block">
-	                            <div>
-	                                <h4 class="card-title m-b-0">Overview</h4>
-	                            </div>
-	                        </div>	
-	                    	<div class = "row">
-                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Name</h5></div>
-                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Quantity</h5></div>
-                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Price</h5></div>
-                               	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Option</h5></div>
-                               	<div class ="col"><h5 style="color: #ff0000; font-weight: bold;">Delete</h5></div>
-                               </div>
-	                    	</div>
-	                    </div>
                         <div class="card">
-                            <div class="card-body" style="overflow:auto;">
-                               
-                                <div class="" id="sales-chart" style="height: 355px;">
-	                                
-	                                <c:forEach var = "product" items = "${products }">
-										<div class ="row" style = "padding: 15px">
-		                                	<div class = "col">${product.name }</div>
-		                                	<div class = "col">${product.quantity }</div>
-		                                	<div class = "col">${product.price }</div>
-		                                	<div class = "col"><button class = "btn btn-primary">Option</button></div>
-		                                	<div class = "col"><button class = "btn btn-danger">Delete</button></div>
-		                                </div>
-	                                </c:forEach>
-                                </div>
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div>
+                                        <h4 style="padding:20px;" class="card-title m-b-0">Select Product Type</h4>
+                                    </div>
+                                </div>	
+                                <form:form action="${addProduct }" method = "POST" modelAttribute="product">
+                                	<form:select path="type" class="browser-default custom-select">
+                                		<form:option value = "laptop" name = "Laptop"/>
+                                		<form:option value = "camera" name = "Camera"/>
+                                		<form:option value = "smart_phone" name = "Smart Phone"/>
+                                	</form:select>
+                                	<form:button type="submit" class ="btn btn-primary">Next</form:button>
+                                </form:form>
                             </div>
+                            <div class = "card-body" ></div>
+                            <div class = "card-body" ></div>
+                            <div class = "card-body" ></div>
+                            <div class = "card-body" ></div>
+                            <div class = "card-body" ></div>
+                            <div class = "card-body" ></div>
+                            <div class = "card-body" ></div>
+                            
                         </div>
                     </div>
                 </div>
                 </div>
+                
+                
                 
     <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
