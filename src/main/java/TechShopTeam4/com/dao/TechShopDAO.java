@@ -435,4 +435,91 @@ public class TechShopDAO {
 				product.getOperaSystem(),
 				date);
 	}
+	
+	public void addProductImage(int id, String name, int createAt) {
+		String sql = "INSERT INTO `product_image` "
+				+ "(product_id, image_path, create_at) "
+				+ "VALUES (?,?,?) ";
+		jdbcTemplate.update(sql, id, name, createAt);
+	}
+	
+	public General findGeneralProductById(int productId) {
+		String sql = "SELECT p.id, "
+				+ "p.quantity, "
+				+ "p.price, "
+				+ "ld.name, "
+				+ "ld.chip, "
+				+ "ld.ram, "
+				+ "ld.vga, "
+				+ "ld.display, "
+				+ "ld.camera, "
+				+ "ld.hard_disk, "
+				+ "ld.keyboard, "
+				+ "ld.port, "
+				+ "ld.battery, "
+				+ "ld.opera_system "
+				+ "FROM laptop_description ld, product p "
+				+ "WHERE ld.product_id = p.id "
+				+ "AND p.id = ? ";
+		try {
+			General product = jdbcTemplate.queryForObject(sql, new GeneralMapper(), productId);
+			return product;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public void updateProduct(General product, int createAt) {
+		String sql = "UPDATE `product` "
+				+ "SET quantity = ?,"
+				+ "price = ?,"
+				+ "create_at = ? "
+				+ "WHERE id = ?";
+		jdbcTemplate.update(sql, product.getQuantity(),
+				product.getPrice(),
+				createAt,
+				product.getProductId());
+		sql = "UPDATE `laptop_description` "
+				+ "SET name = ?,"
+				+ "chip = ?,"
+				+ "ram = ?,"
+				+ "vga = ?,"
+				+ "display = ?,"
+				+ "camera = ?,"
+				+ "hard_disk = ?,"
+				+ "keyboard = ?,"
+				+ "port = ?, "
+				+ "battery = ?,"
+				+ "opera_system = ?,"
+				+ "create_at = ? "
+				+ "WHERE product_id = ?";
+		jdbcTemplate.update(sql, product.getName(),
+				product.getChip(),
+				product.getRam(),
+				product.getVga(),
+				product.getDisplay(),
+				product.getCamera(),
+				product.getHardDisk(),
+				product.getKeyboard(),
+				product.getPort(),
+				product.getBattery(),
+				product.getOperaSystem(),
+				createAt,
+				product.getProductId());
+	}
+	
+	public void deleteProduct(int productId) {
+		String sql = "DELETE FROM `laptop_description` "
+				+ "WHERE product_id = ?";
+		jdbcTemplate.update(sql, productId);
+		sql = "DELETE FROM `product_image` "
+				+ "WHERE product_id = ?";
+		jdbcTemplate.update(sql, productId);
+		sql = "DELETE FROM `product` "
+				+ "WHERE id = ?";
+		jdbcTemplate.update(sql, productId);
+		sql = "DELETE FROM `category` "
+				+ "WHERE id = ?";
+		jdbcTemplate.update(sql, productId);
+	}
 }

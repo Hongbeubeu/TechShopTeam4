@@ -106,23 +106,70 @@ public class AdminController {
 			@PathVariable(value = "adminId", required = true) Integer adminId,
 			@ModelAttribute General product) {
 		model.addAttribute("admin", baseService.findAdminById(adminId));
-		model.addAttribute("product_id",baseService.addProduct(product));
+		model.addAttribute("product",baseService.addProduct(product));
+		model.addAttribute("productImage", new MyFile());
 		return "add_product_image";
 		
 	}
 	
+	@PostMapping(value = "/addProductImage/{adminId}/{productId}")
+	public String addProductImage(MyFile myFile, 
+			Model model, 
+			HttpServletRequest request,
+			@PathVariable(value = "productId", required = true) Integer productId,
+			@PathVariable(value = "adminId", required = true) Integer adminId){
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("product", baseService.findProductById(productId));
+		model.addAttribute("productImage", new MyFile());
+		try {
+			MultipartFile multipartFile = myFile.getMultipartFile();
+			String fileName = myFile.getDescription();
+			baseService.addProductImage(productId, fileName);
+			File file = new File("C:\\Users\\hongt\\Documents\\WEB_WORKSPACE\\TechShopTeam4.com\\src\\main\\webapp\\resources\\static\\product_images", fileName);
+			multipartFile.transferTo(file);
+		} catch (Exception e) {
+			model.addAttribute("message", "upload failed");
+			return "add_product_image";
+		}
+		return "add_product_image";
+	}
+	
+	@GetMapping(value = "/update/{adminId}/{productId}")
+	public String update(Model model,
+			@PathVariable(value = "productId", required = true) Integer productId,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("product", baseService.findGeneralProductById(productId));
+		return "update_product_info";
+	}
+	
+	@PostMapping(value = "/doUpdate/{adminId}")
+	public String doUpdate(Model model,
+			General product,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		baseService.updateProduct(product);
+		return "redirect:/admin/products/" + adminId;
+	}
+	@GetMapping(value = "/delete/{adminId}/{productId}")
+	public String delete(Model model,
+			@PathVariable(value = "productId", required = true) Integer productId,
+			@PathVariable(value = "adminId", required = true) Integer adminId){
+		baseService.deleteProduct(productId);
+		return "redirect:/admin/products/" + adminId;
+	}
 	
 	// test++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
+	@SuppressWarnings("unused")
 	@GetMapping(value = "/test")
 	public String test(HttpServletResponse response, HttpServletRequest request, Model model) {
 		
 		Cookie[] cookies = request.getCookies();
 		for(int i = 0 ; i< cookies.length; i++) {
 			if(cookies[i].getName().equals("JSESSIONID")) {
-				model.addAttribute("myFile", new MyFile());
-				model.addAttribute("error", "cookie is set");
-	        	return "test";
+				model.addAttribute("productImage", new MyFile());
+				model.addAttribute("message", "cookie is set");
+	        	return "add_product_image";
 			}
 			model.addAttribute("myFile", new MyFile());
 			model.addAttribute("error", "cookie miss");
@@ -135,28 +182,9 @@ public class AdminController {
 	        response.addCookie(newCookie);
 	        
 		model.addAttribute("myFile", new MyFile());
-		return "test";
+		return "add_product_image";
 	}
+	//---------------------------------------------------------------------------------------
 	
-	@PostMapping(value = "/uploadFile")
-	public String uploadFile(MyFile myFile, Model model, HttpServletRequest request) {
-		model.addAttribute("message", "upload success");
-		model.addAttribute("description", myFile.getDescription());
-		Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-        	model.addAttribute("error", "miss cookie");
-        	//return "test";
-        }
-		try {
-			MultipartFile multipartFile = myFile.getMultipartFile();
-			String fileName = multipartFile.getOriginalFilename();
-			File file = new File("D:/files", fileName);
-			multipartFile.transferTo(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("message", "upload failed");
-		}
-		//model.addAttribute("message", "upload success");
-		return "test";
-	}
+	
 }

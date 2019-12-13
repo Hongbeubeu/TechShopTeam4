@@ -1,6 +1,7 @@
 package TechShopTeam4.com.entities;
 
 public class General {
+	private int productId;
 	private String type;
 	private String brand;
 	private String name;
@@ -17,6 +18,14 @@ public class General {
 	private int quantity;
 	private int price;
 	
+	
+	
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
 	public String getType() {
 		return type;
 	}

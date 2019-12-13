@@ -193,7 +193,7 @@ public class BaseService {
 		return techShopDAO.findBrandByType(type);
 	}
 	
-	public int addProduct(General product) {
+	public General addProduct(General product) {
 		int date = DateTime.setDateToInt();
 		int parentId = techShopDAO.findParent(product.getBrand(), product.getType());
 		techShopDAO.addProductToCategory(product.getName(), parentId, date);
@@ -212,7 +212,25 @@ public class BaseService {
 			techShopDAO.addProductToProduct(id, desId, product.getQuantity(), product.getPrice(), date );
 			//techShopDAO.addSmartPhoneDescription(id, product, date);	
 		}
-		return id;
+		product.setProductId(id);
+		return product;
+	}
+	
+	public void addProductImage(int id, String name) {
+		int createAt = DateTime.setDateToInt();
+		techShopDAO.addProductImage(id, name, createAt);
+	}
+	
+	public General findGeneralProductById(int productId) {
+		return techShopDAO.findGeneralProductById(productId);
+	}
+	
+	public void updateProduct(General product) {
+		techShopDAO.updateProduct(product, DateTime.setDateToInt());
+	}
+	
+	public void deleteProduct(int productId) {
+		techShopDAO.deleteProduct(productId);
 	}
 	
 	private boolean checkEmail(String email) {
@@ -231,6 +249,7 @@ public class BaseService {
         byte[] messageDigest = md.digest(text.getBytes());
         return convertByteToHex(messageDigest);
 	}
+	
 	private String convertByteToHex(byte[] data) {
 		BigInteger number = new BigInteger(1, data);
 		String hashtext = number.toString(16);

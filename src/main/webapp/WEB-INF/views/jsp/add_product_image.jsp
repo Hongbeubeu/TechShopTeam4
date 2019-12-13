@@ -33,7 +33,7 @@
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
-	<c:url value = "/admin/addProduct/${admin.id }" var="addProduct"/>
+	<c:url value = "/admin/addProductImage/${admin.id }/${product.productId }" var="addProductImage"/>
     <jsp:include page="admin_header.jsp"></jsp:include>
     <jsp:include page="admin_navbar.jsp"></jsp:include>
         <div class="page-wrapper">
@@ -62,17 +62,18 @@
                             <div class="card-body">
                                 <div class="d-flex no-block">
                                     <div>
-                                        <h4 style="padding:20px;" class="card-title m-b-0">Select Product Type</h4>
+                                        <h4 style="padding:20px;" class="card-title m-b-0">Upload product image for ${product.name }</h4>
                                     </div>
                                 </div>	
-                                <form:form action="${addProduct }" method = "POST" modelAttribute="product">
-                                	<form:select path="type" class="browser-default custom-select">
-                                		<form:option value = "laptop" name = "Laptop"/>
-                                		<form:option value = "camera" name = "Camera"/>
-                                		<form:option value = "smart_phone" name = "Smart Phone"/>
-                                	</form:select>
-                                	<form:button type="submit" class ="btn btn-primary">Next</form:button>
+                                <form:form action="${addProductImage }" method = "POST" enctype="multipart/form-data" modelAttribute="productImage" >
+                                	<form:input path="" type = "hidden" name = "productId" value = "${product.productId }"/>
+                                	Image: <form:input type="file" path="multipartFile" name="multipartFile" /> <br /> <br/>
+    								Description: <form:input style="width: 470px" path="description"
+									value="${product.name }" />
+								<br />
+                                	<form:button type="submit" class ="btn btn-info">Next</form:button>
                                 </form:form>
+                                <c:if test="${not empty message }"><p style="color: red">${message }<p></c:if>
                             </div>
                             <div class = "card-body" ></div>
                             <div class = "card-body" ></div>
