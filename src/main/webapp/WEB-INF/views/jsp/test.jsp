@@ -15,7 +15,12 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/product_styles.css" />">
     </head>
 	<body>
-	${month}
-        
+	<form:form method="POST" action="uploadFile" enctype="multipart/form-data" modelAttribute="myFile">
+    	File: <input type="file" name="multipartFile" /> <br /> <br/>
+    	Description: <form:input path="description"/> <br />
+    	<input type="submit" value="Submit" />
+  	</form:form> 
+        <c:if test="${not empty message }">${message }</c:if>
+        <c:if test="${not empty error }">${error }</c:if>
     </body>
 </html>
