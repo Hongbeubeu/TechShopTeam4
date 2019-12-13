@@ -47,8 +47,27 @@
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h3 class="text-themecolor">ADD PRODUCT</h3>
+                         <h4>Product Image Add Before</h4>
                     </div>
                 </div>
+                <c:if test="${not empty images }">
+                <div class ="row">
+		        	<c:forEach var="image" items="${images }">
+		        		<div class ="col" >
+		        			${image.imgPath }
+		        			<img style = "width: 500px; height: 300px; " src="<c:url value="/resources/product_images/${image.imgPath }" />" alt="">
+		        		</div>
+		        	</c:forEach>
+	        	</div>
+	        	</c:if>
+	        	<c:if test="${empty images }">
+	        	<div class ="row">
+                <h2>Product Image Add Before</h2>
+	        		<div class ="col" >
+	        			${product.name } haven't image
+	        		</div>
+	        	</div>
+	        	</c:if>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->

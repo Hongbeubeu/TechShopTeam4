@@ -64,7 +64,8 @@
                            	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Name</h5></div>
                            	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Quantity</h5></div>
                            	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Price</h5></div>
-                           	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Option</h5></div>
+                           	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Upload Image</h5></div>
+                           	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Update</h5></div>
                            	<div class ="col"><h5 style="color: #ff0000; font-weight: bold;">Delete</h5></div>
                            </div>
                  	</div>
@@ -77,6 +78,7 @@
 	                              	<div class = "col">${product.name }</div>
 	                              	<div class = "col">${product.quantity }</div>
 	                              	<div class = "col">${product.price }</div>
+	                              	<div class = "col"><a href="/TechShopTeam4.com/admin/addImage/${admin.id }/${product.id }"><button class = "btn btn-primary">Upload</button></a></div>
 	                              	<div class = "col"><a href="/TechShopTeam4.com/admin/update/${admin.id }/${product.id }"><button class = "btn btn-primary">Update</button></a></div>
 	                              	<div class = "col"><a href="/TechShopTeam4.com/admin/delete/${admin.id }/${product.id }"><button class = "btn btn-danger">Delete</button></a></div>
 	                            </div>
@@ -85,8 +87,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-		</div>      
+            </div>   
     <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
 

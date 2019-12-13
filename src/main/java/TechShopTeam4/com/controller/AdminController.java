@@ -109,7 +109,6 @@ public class AdminController {
 		model.addAttribute("product",baseService.addProduct(product));
 		model.addAttribute("productImage", new MyFile());
 		return "add_product_image";
-		
 	}
 	
 	@PostMapping(value = "/addProductImage/{adminId}/{productId}")
@@ -131,6 +130,7 @@ public class AdminController {
 			model.addAttribute("message", "upload failed");
 			return "add_product_image";
 		}
+		model.addAttribute("images", baseService.findProductImageById(productId));
 		return "add_product_image";
 	}
 	
@@ -150,12 +150,24 @@ public class AdminController {
 		baseService.updateProduct(product);
 		return "redirect:/admin/products/" + adminId;
 	}
+	
 	@GetMapping(value = "/delete/{adminId}/{productId}")
 	public String delete(Model model,
 			@PathVariable(value = "productId", required = true) Integer productId,
 			@PathVariable(value = "adminId", required = true) Integer adminId){
 		baseService.deleteProduct(productId);
 		return "redirect:/admin/products/" + adminId;
+	}
+	
+	@GetMapping(value = "/addImage/{adminId}/{productId}")
+	public String addImage(Model model,
+			@PathVariable(value = "productId", required = true) Integer productId,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("images", baseService.findProductImageById(productId));
+		model.addAttribute("product",baseService.findGeneralProductById(productId));
+		model.addAttribute("productImage", new MyFile());
+		return "add_product_image";
 	}
 	
 	// test++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

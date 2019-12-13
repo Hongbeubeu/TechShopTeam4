@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 </div>
-                </div>
+              
     <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
 
