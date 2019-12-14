@@ -34,6 +34,7 @@
 
 <body class="fix-header fix-sidebar card-no-border">
 	<c:url value = "/admin/addProductImage/${admin.id }/${product.productId }" var="addProductImage"/>
+	<c:url value = "/admin/deleteImage/${admin.id }/${product.productId }" var = "deleteImage"/>
     <jsp:include page="admin_header.jsp"></jsp:include>
     <jsp:include page="admin_navbar.jsp"></jsp:include>
         <div class="page-wrapper">
@@ -55,7 +56,11 @@
 		        	<c:forEach var="image" items="${images }">
 		        		<div class ="col" >
 		        			${image.imgPath }
-		        			<img style = "width: 500px; height: 300px; " src="<c:url value="/resources/product_images/${image.imgPath }" />" alt="">
+		        			<form action = "${deleteImage }" method="POST">
+		        				<input name ="imagePath" type = "hidden" value = "${image.imgPath }">
+		        				<button type = "submit" class = "btn btn-danger">Delete</button>
+		        			</form>
+		        			<img class="img-rounded" style = "margin:2px; width: 500px; height: 300px; " src="<c:url value="/resources/product_images/${image.imgPath }" />" alt="">
 		        		</div>
 		        	</c:forEach>
 	        	</div>

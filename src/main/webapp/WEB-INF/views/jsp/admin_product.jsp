@@ -44,9 +44,20 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <div class="row page-titles">
-                    <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">PRODUCTS</h3>
-                       	<div class = "row" style = "padding: 15px"><a href="/TechShopTeam4.com/admin/direct/${admin.id }"><button class = "btn btn-info">Add Product</button></a></div>
+                    <div class="col-md-10 align-self-center">
+	                    <div class = "row">
+		                    <div class = "col">
+		                        <h3 class="text-themecolor">PRODUCTS</h3>
+		                    </div>
+	                     	<div class = "col">
+	                        <!-- Search form -->
+								<input class="form-control" type="text" placeholder="Search Product" aria-label="Search">
+	                       	</div>
+	                       	<div class = "col">
+	                       	<div class = "col">
+	                       		<a href="/TechShopTeam4.com/admin/direct/${admin.id }"><button class = "btn btn-info">Add Product</button></a></div>
+	                		</div>
+	                	</div>
                 	</div>
                 </div>
            	</div>
@@ -55,11 +66,6 @@
                 <div class="col-lg-12">
                 <div class="card">
                 	<div class="card-body" style="overflow:auto;">
-                 	<div class="d-flex no-block">
-                         <div>
-                             <h4 class="card-title m-b-0">Overview</h4>
-                         </div>
-                     </div>	
                  	<div class = "row">
                            	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Product Name</h5></div>
                            	<div class ="col"><h5 style="color: #20aee3; font-weight: bold;">Quantity</h5></div>

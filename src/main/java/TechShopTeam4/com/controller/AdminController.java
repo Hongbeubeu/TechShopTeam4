@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import TechShopTeam4.com.entities.*;
@@ -163,6 +164,19 @@ public class AdminController {
 	public String addImage(Model model,
 			@PathVariable(value = "productId", required = true) Integer productId,
 			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("images", baseService.findProductImageById(productId));
+		model.addAttribute("product",baseService.findGeneralProductById(productId));
+		model.addAttribute("productImage", new MyFile());
+		return "add_product_image";
+	}
+	
+	@PostMapping(value = "/deleteImage/{adminId}/{productId}")
+	public String deleteImage(Model model,
+			@RequestParam String imagePath,
+			@PathVariable(value = "productId", required = true) Integer productId,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		baseService.deleteImage(imagePath);
 		model.addAttribute("admin", baseService.findAdminById(adminId));
 		model.addAttribute("images", baseService.findProductImageById(productId));
 		model.addAttribute("product",baseService.findGeneralProductById(productId));

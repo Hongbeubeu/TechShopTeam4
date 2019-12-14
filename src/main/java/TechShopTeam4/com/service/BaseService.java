@@ -233,6 +233,11 @@ public class BaseService {
 		techShopDAO.deleteProduct(productId);
 	}
 	
+	public void deleteImage(String imagePath) {
+		imagePath.replace('+', ' ');
+		techShopDAO.deleteImage(imagePath);
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

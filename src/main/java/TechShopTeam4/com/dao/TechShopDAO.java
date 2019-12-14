@@ -522,4 +522,10 @@ public class TechShopDAO {
 				+ "WHERE id = ?";
 		jdbcTemplate.update(sql, productId);
 	}
+	
+	public void deleteImage(String imagePath) {
+		String sql = "DELETE FROM `product_image` "
+				+ "WHERE image_path = ?";
+		jdbcTemplate.update(sql, imagePath);
+	}
 }
