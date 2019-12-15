@@ -51,6 +51,16 @@ public class TechShopDAO {
 		}
 	}
 	
+	public List<User> findAllUser(){
+		String sql = "SELECT * "
+				+ "FROM `user`";
+		try {
+			List<User> users = jdbcTemplate.query(sql, new UserMapper());
+			return users;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 	public User findAdminByEmail(String email) {
 		String sql = "SELECT u.id, u.email, u.password, u.phone_number, u.address, u.create_at "
 				+ "FROM user u, role r, user_role ur  "

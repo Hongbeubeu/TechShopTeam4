@@ -75,6 +75,7 @@ public class AdminController {
 	public String users(Model model,
 			@PathVariable(value = "adminId", required = true) Integer adminId) {
 		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("users", baseService.findAllUser());
 		return "admin_user";
 	}
 	

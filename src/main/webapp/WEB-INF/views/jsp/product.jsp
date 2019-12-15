@@ -60,11 +60,11 @@
 		        </div>
 			    <div class = "col">
 				   <form action="${addToCart}" method="POST">
-				   		<input type="number" name = "quantity">
+				   		<input type="number" class = "form-control" name = "quantity">
 				   		<input type="hidden" value="${user.id }" name = "userId">
 				   		<input type="hidden" value="${product.intPrice }" name = "price">
 				   		<input type="hidden" value="${product.productId }" name = "productId">
-		           		<button class="btn btn-primary">Add to Cart</button>
+		           		<button style ="margin-top: 10px" class="btn btn-primary">Add to Cart</button>
 		           </form>
 			    </div>
 		    	</div> 

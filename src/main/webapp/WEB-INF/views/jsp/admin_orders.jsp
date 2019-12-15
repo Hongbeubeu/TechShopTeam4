@@ -45,7 +45,7 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">USERS</h3>
+                        <h3 class="text-themecolor">ORDERS</h3>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -61,22 +61,30 @@
                             <div class="card-body">
                                 <div class="d-flex no-block">
                                     <div>
-                                        <h4 class="card-title m-b-0">User List</h4>
+                                        <h4 class="card-title m-b-0">Order List</h4>
                                     </div>
                                 </div>	
-                                <c:if test="${not empty users }">
+                                <c:if test="${not empty orders }">
                                 <table class="table table-hover">
                                 	<tr>
+                                		<th>Order Id</th>
                                 		<th>Email</th>
-                                		<th>Phone Number</th>
-                                		<th>Address</th>
+                                		<th>Product Id</th>
+                                		<th>Product Name</th>
+                                		<th>Quantity</th>
+                                		<th>Price</th>
+                                		<th>Delivery</th>
                                 		<th>Delete</th>
                                 	</tr>
-                                	<c:forEach var = "user" items = "${users }">
+                                	<c:forEach var = "order" items = "${Oders }">
                                 		<tr>
-                                			<td>${user.email }</td>
-                                			<td>${user.phoneNumber }</td>
-                                			<td>${user.address }</td>
+                                			<td>${order.orderId }</td>
+                                			<td>${order.email }</td>
+                                			<td>${order.orderId }</td>
+                                			<td>${order.orderId }</td>
+                                			<td>${order.orderId }</td>
+                                			<td>${order.orderId }</td>
+                                			<td><button class = "btn btn-primary">Delivery</button></td>
                                 			<td><button class = "btn btn-danger">Delete</button></td>
                                 		</tr>
                                 	</c:forEach>

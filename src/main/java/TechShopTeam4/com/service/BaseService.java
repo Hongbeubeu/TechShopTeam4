@@ -40,6 +40,10 @@ public class BaseService {
 			}
 	}
 	
+	public List<User> findAllUser(){
+		return techShopDAO.findAllUser();
+	}
+	
 	public User login(User user) {
 		User tuser = findByEmail(user.getEmail());
 		if(tuser == null ) 
