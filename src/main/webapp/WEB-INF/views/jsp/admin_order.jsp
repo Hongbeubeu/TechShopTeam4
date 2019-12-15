@@ -76,14 +76,14 @@
                                 		<th>Delivery</th>
                                 		<th>Delete</th>
                                 	</tr>
-                                	<c:forEach var = "order" items = "${Oders }">
+                                	<c:forEach var = "order" items = "${orders }">
                                 		<tr>
                                 			<td>${order.orderId }</td>
                                 			<td>${order.email }</td>
-                                			<td>${order.orderId }</td>
-                                			<td>${order.orderId }</td>
-                                			<td>${order.orderId }</td>
-                                			<td>${order.orderId }</td>
+                                			<td>${order.productId }</td>
+                                			<td>${order.name }</td>
+                                			<td>${order.quantity }</td>
+                                			<td>${order.price }</td>
                                 			<td><button class = "btn btn-primary">Delivery</button></td>
                                 			<td><button class = "btn btn-danger">Delete</button></td>
                                 		</tr>

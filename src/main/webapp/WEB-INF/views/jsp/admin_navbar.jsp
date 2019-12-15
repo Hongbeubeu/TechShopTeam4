@@ -36,7 +36,7 @@
 	                        </a>
                         </li>
                         <li> 
-                        	<a class="waves-effect waves-dark" href="/TechShopTeam4.com/admin/users/${admin.id }" aria-expanded="false">
+                        	<a class="waves-effect waves-dark" href="/TechShopTeam4.com/admin/orders/${admin.id }" aria-expanded="false">
 	                        	<i class="fa fa-table"></i>
 	                        	<span class="hide-menu">Orders</span>
 	                        </a>

@@ -2,6 +2,7 @@ package TechShopTeam4.com.entities;
 
 public class Purchased {
 	private int orderId;
+	private String email;
 	private int productId;
 	private String name;
 	private String imgPath;
@@ -12,6 +13,12 @@ public class Purchased {
 	private String date;
 	
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getIntPrice() {
 		return intPrice;
 	}

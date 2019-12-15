@@ -133,6 +133,30 @@ public class TechShopDAO {
 		}
 	}
 	
+	public List<Purchased> findAllOrder(){
+		String sql = "SELECT o.id, "
+				+ "u.email, "
+				+ "ld.name, "
+				+ "od.product_id, "
+				+ "od.quantity, "
+				+ "p.price, "
+				+ "o.status,"
+				+ "o.create_at "
+				+ "FROM `order` o,`order_detail` od,`user` u, `laptop_description` ld,  `product` p " 
+				+ "WHERE o.id = od.order_id "
+				+ "AND p.id = od.product_id "
+				+ "AND p.id = od.product_id "
+				+ "AND o.customer_id = u.id "
+				+ "AND od.product_id = ld.product_id "
+				+ "AND od.status = ?";
+		try {
+			List<Purchased> purchased = jdbcTemplate.query(sql, new AdminOrderMapper(), "inorder");
+			return purchased;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	public Laptop findProductById(int id) {
 		String sql = "SELECT ld.product_id,"
 				+ "ld.name,"

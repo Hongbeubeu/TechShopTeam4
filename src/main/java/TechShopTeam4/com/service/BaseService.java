@@ -84,6 +84,10 @@ public class BaseService {
 		}
 	}
 	
+	public List<Purchased> findAllOrder(){
+		return techShopDAO.findAllOrder();
+	}
+	
 	public List<Laptop> findAllProduct() {
 		return techShopDAO.findAllProduct();
 	}

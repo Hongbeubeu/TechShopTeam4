@@ -79,6 +79,14 @@ public class AdminController {
 		return "admin_user";
 	}
 	
+	@GetMapping(value = "/orders/{adminId}")
+	public String orders(Model model,
+			@PathVariable(value = "adminId", required = true) Integer adminId) {
+		model.addAttribute("admin", baseService.findAdminById(adminId));
+		model.addAttribute("orders", baseService.findAllOrder());
+		return "admin_order";
+	}
+	
 	@GetMapping(value = "/direct/{adminId}")
 	public String direct(Model model,
 			@PathVariable(value = "adminId", required = true) Integer adminId) {
