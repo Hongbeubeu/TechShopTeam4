@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/resources/backend/images/favicon.png" />">
-    <title>MANAGE USER</title>
+    <title>ORDERS</title>
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/backend/node_modules/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/backend/node_modules/perfect-scrollbar/css/perfect-scrollbar.css" />" rel="stylesheet">
@@ -84,8 +84,8 @@
                                 			<td>${order.name }</td>
                                 			<td>${order.quantity }</td>
                                 			<td>${order.price }</td>
-                                			<td><button class = "btn btn-primary">Delivery</button></td>
-                                			<td><button class = "btn btn-danger">Delete</button></td>
+                                			<td><a href="/TechShopTeam4.com/admin/delivery/${admin.id }/${order.orderId }/${order.productId}"><button class = "btn btn-primary">Delivery</button></a></td>
+                                			<td><a href="/TechShopTeam4.com/admin/deleteOrder/${admin.id }/${order.orderId }"><button class = "btn btn-danger">Delete</button></a></td>
                                 		</tr>
                                 	</c:forEach>
                                 </table>

@@ -246,6 +246,32 @@ public class BaseService {
 		techShopDAO.deleteImage(imagePath);
 	}
 	
+	public void deleteUser(int userId) {
+		techShopDAO.deleteUser(userId);
+	}
+	
+	public void deleteOrder(int orderId) {
+		techShopDAO.deleteOrder(orderId);
+	}
+	
+	public DeliveryBill findDeliveryBill(int orderId, int productId) {
+		return techShopDAO.findDeliveryBill(orderId, productId);
+	}
+	
+	public void deliveryOrder(int orderId, int productId) {
+		techShopDAO.deliveryOrder(orderId, productId);
+	}
+	
+	public List<ManageProduct> findProductByName(String productName){
+		productName = "%" + productName + "%";
+		return techShopDAO.findProductByName(productName);
+	}
+	
+	public List<User> findUserByName(String userName){
+		userName = "%" + userName + "%";
+		return techShopDAO.findUserByName(userName);
+	}
+	
 	private boolean checkEmail(String email) {
 	    String emailPattern = "^[\\w!#$%&�*+/=?`{|}~^-]+(?:\\.[\\w!#$%&�*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	    Pattern regex = Pattern.compile(emailPattern);

@@ -331,7 +331,14 @@ public class TechShopDAO {
 	}
 	
 	public List<Purchased> findOrderByUserId(int userId){
-		String sql = "SELECT o.id, o.status, od.product_id, od.quantity, od.create_at, ld.name, p.price , pi.image_path "
+		String sql = "SELECT o.id, "
+				+ "od.status, "
+				+ "od.product_id, "
+				+ "od.quantity, "
+				+ "od.create_at, "
+				+ "ld.name, "
+				+ "p.price , "
+				+ "pi.image_path "
 				+ "FROM `order` o, `order_detail` od, `laptop_description` ld, `product_image` pi, `product` p "
 				+ "WHERE o.customer_id = ? "
 				+ "AND od.product_id = pi.product_id "
@@ -561,5 +568,84 @@ public class TechShopDAO {
 		String sql = "DELETE FROM `product_image` "
 				+ "WHERE image_path = ?";
 		jdbcTemplate.update(sql, imagePath);
+	}
+	
+	public void deleteUser(int userId) {
+		String sql = "DELETE FROM `user_role` "
+				+ "WHERE user_id = ?";
+		jdbcTemplate.update(sql, userId);
+		sql = "DELETE FROM `user` "
+				+ "WHERE id = ?";
+		jdbcTemplate.update(sql, userId);
+	}
+	
+	public void deleteOrder(int orderId) {
+		String sql = "DELETE FROM `order_detail` "
+				+ "WHERE order_id = ? ";
+		jdbcTemplate.update(sql, orderId);
+		sql = "DELETE FROM `delivery` "
+				+ "WHERE order_id = ?";
+		jdbcTemplate.update(sql, orderId);
+		sql = "DELETE FROM `order` "
+				+ "WHERE id = ?";
+		jdbcTemplate.update(sql, orderId);
+	}
+	
+	public DeliveryBill findDeliveryBill(int orderId, int productId){
+		String sql = "SELECT d.order_id, "
+				+ "d.first_name, "
+				+ "d.last_name, "
+				+ "d.phone_number, "
+				+ "d.address, "
+				+ "d.create_at, "
+				+ "p.id, "
+				+ "od.quantity, "
+				+ "ld.name, "
+				+ "p.price "
+				+ "FROM `delivery` d,`product` p,`order_detail` od, `laptop_description` ld "
+				+ "WHERE d.order_id = od.order_id "
+				+ "AND ld.product_id = p.id "
+				+ "AND od.product_id = p.id "
+				+ "AND d.order_id = ? "
+				+ "AND p.id = ?";
+		try {
+			DeliveryBill deliveryBill = jdbcTemplate.queryForObject(sql, new DeliveryBillMapper(), orderId, productId);
+			return deliveryBill;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public void deliveryOrder(int orderId, int productId) {
+		String sql = "UPDATE `order_detail` "
+				+ "SET status = ? "
+				+ "WHERE order_id = ? "
+				+ "AND product_id = ? ";
+		jdbcTemplate.update(sql, "delivered", orderId, productId);
+	}
+	
+	public List<ManageProduct> findProductByName(String productName){
+		String sql = "SELECT ld.product_id, p.quantity, p.price, ld.name "
+				+ "FROM product p,laptop_description ld "
+				+ "WHERE ld.name LIKE ? "
+				+ "AND p.id = ld.product_id";
+		try {
+			List<ManageProduct> product = jdbcTemplate.query(sql, new ManageProductMapper(), productName);
+			return product;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<User> findUserByName(String userName){
+		String sql = "SELECT * "
+				+ "FROM `user` "
+				+ "WHERE email LIKE ?";
+		try {
+			List<User> users = jdbcTemplate.query(sql, new UserMapper(), userName);
+			return users;
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 }

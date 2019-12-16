@@ -15,6 +15,11 @@
 
 package TechShopTeam4.com.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +42,34 @@ public class BaseController {
 	//trang index
 	@GetMapping(value = {"/", "/{userId}"})
 	public String index(Model model,
+			HttpServletResponse response,
+			HttpServletRequest request,
 			@PathVariable(value = "userId", required = false) Integer userId,
 			@RequestParam(value = "productName", required = false) String productName) {
 		model.addAttribute("products", baseService.findAllProduct());
-		if(userId != null)
-			model.addAttribute("user", baseService.findUserById(userId));
+		if(userId != null) {
+			Boolean test = false;
+			HttpSession session = request.getSession();
+			Cookie[] cookies = request.getCookies();
+			for(int i = 0 ; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("SESSIONID")) {
+					test = true;
+					if(!cookies[i].getValue().equals(session.getId())) {
+						return "redirect:/";
+					}
+				}
+			}
+			if(!test){
+				return "redirect:/";
+			}
+			if(session.getAttribute("userId") != null) {
+				User user = baseService.findUserById(userId);
+				if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+					model.addAttribute("user", user);
+				}else
+					return "redirect:/" + session.getAttribute("userId").toString();
+			}	
+		}
 		if(productName != null)
 			model.addAttribute("search", baseService.searchProductByName(productName));
 		return "index"; 
@@ -50,16 +78,45 @@ public class BaseController {
 //dang nhap, dang ky, dang xuat
 /*-----------------------------------------------------------*/
 	//chuyen den trang login
-	@GetMapping(value = "/login")
-	public String login(Model model) {
-		model.addAttribute("user", new User());
+	@GetMapping(value = {"/login/{userId}", "/login"})
+	public String login(Model model,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			@PathVariable(value = "userId", required = false) Integer userId) {
+		if(userId == null)
+			model.addAttribute("user", new User());
+		else {
+			Boolean test = false;
+			HttpSession session = request.getSession();
+			Cookie[] cookies = request.getCookies();
+			for(int i = 0 ; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("SESSIONID")) {
+					test = true;
+					if(!cookies[i].getValue().equals(session.getId())) {
+						return "redirect:/login";
+					}
+				}
+			}
+			if(!test){
+				return "redirect:/login";
+			}
+			if(session.getAttribute("userId") != null) {
+				User user = baseService.findUserById(userId);
+				if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+					model.addAttribute("user", user);
+				}else
+					return "redirect:/login" + session.getAttribute("userId").toString();
+			}
+		}
 		return "login";
 	}
 	
 	//xu ly login
 	@PostMapping(value = "/doLogin")
-	public String doLogin(@ModelAttribute("User") User user, 
-								Model model) {
+	public String doLogin(@ModelAttribute("User") User user,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			Model model) {
 		User tuser = baseService.login(user);
 		if( tuser == null) {
 			model.addAttribute("error", "nhap email hoac mat khau khong dung");
@@ -67,14 +124,46 @@ public class BaseController {
 			return "login";
 		}
 		else {
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", tuser.getId());
+			Cookie cookie = new Cookie("SESSIONID", session.getId() );
+			response.addCookie(cookie);
+			cookie.setMaxAge(24*60*60);
 			return "redirect:/" + tuser.getId();
 		}
 	}
 
 	//chuyen den trang register
-	@GetMapping(value = "/register")
-	public String register(Model model) {
-		model.addAttribute("user", new User());
+	@GetMapping(value = {"/register/{userId}", "/register"})
+	public String register(Model model,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			@PathVariable(value = "userId", required = false) Integer userId) {
+		if(userId == null)
+			model.addAttribute("user", new User());
+		else {
+			Boolean test = false;
+			HttpSession session = request.getSession();
+			Cookie[] cookies = request.getCookies();
+			for(int i = 0 ; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("SESSIONID")) {
+					test = true;
+					if(!cookies[i].getValue().equals(session.getId())) {
+						return "redirect:/register";
+					}
+				}
+			}
+			if(!test){
+				return "redirect:/register";
+			}
+			if(session.getAttribute("userId") != null) {
+				User user = baseService.findUserById(userId);
+				if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+					model.addAttribute("user", user);
+				}else
+					return "redirect:/register" + session.getAttribute("userId").toString();
+			}
+		}	
 		return "register";
 	}
 	
@@ -99,7 +188,16 @@ public class BaseController {
 		
 	//log out
 	@GetMapping(value = "/logout")
-	public  String logout() {
+	public  String logout(HttpServletResponse response,
+			HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		for(int i = 0; i < cookies.length; i++) {
+			if(cookies[i].getName().equals("SESSIONID")) {
+				cookies[i].setMaxAge(0);
+			}
+		}
+		HttpSession session = request.getSession();
+		session.invalidate();
 		return "redirect:/";
 	}
 	
@@ -109,30 +207,101 @@ public class BaseController {
 	//xem thong tin chi tiet san pham
 	@GetMapping(value = {"/product/{productId}", "/product/{userId}/{productId}"})
 	public String product(Model model, 
+			HttpServletResponse response,
+			HttpServletRequest request,
 			@PathVariable(value = "productId", required = false) Integer productId,
 			@PathVariable(value = "userId", required = false) Integer userId) {
-		if(userId != null) 
-			model.addAttribute("user", baseService.findUserById(userId));
+		if(userId != null) {
+			Boolean test = false;
+			HttpSession session = request.getSession();
+			Cookie[] cookies = request.getCookies();
+			for(int i = 0 ; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("SESSIONID")) {
+					test = true;
+					if(!cookies[i].getValue().equals(session.getId())) {
+						return "redirect:/";
+					}
+				}
+			}
+			if(!test){
+				return "redirect:/";
+			}
+			if(session.getAttribute("userId") != null) {
+				User user = baseService.findUserById(userId);
+				if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+					model.addAttribute("user", user);
+				}else
+					return "redirect:/" + session.getAttribute("userId").toString();
+				model.addAttribute("user", user);
+			}
+			
+		}
 		model.addAttribute("images", baseService.findProductImageById(productId));
 		model.addAttribute("product", baseService.findProductById(productId));
 		return "product";
 	}
 	
 	//xem san pham co trong cart
-	@GetMapping(value = {"/cart/{userId}"})
-	public String cart(@PathVariable("userId") int userId,
+	@GetMapping(value = "/cart/{userId}")
+	public String cart(@PathVariable(value = "userId") Integer userId,
+			HttpServletResponse response,
+			HttpServletRequest request,
 			Model model) {
-		model.addAttribute("user", baseService.findUserById(userId));
+		Boolean test = false;
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		for(int i = 0 ; i < cookies.length; i++) {
+			if (cookies[i].getName().equals("SESSIONID")) {
+				test = true;
+				if(!cookies[i].getValue().equals(session.getId())) {
+					return "redirect:/";
+				}
+			}
+		}
+		if(!test){
+			return "redirect:/";
+		}
+		if(session.getAttribute("userId") != null) {
+			User user = baseService.findUserById(userId);
+			if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+				model.addAttribute("user", user);
+			}else
+				return "redirect:/" + session.getAttribute("userId").toString();
+			model.addAttribute("user", user);
+		}
 		model.addAttribute("cart", baseService.findCartByUserId(userId));
 		model.addAttribute("totalPrice", baseService.totalPriceInCart(baseService.findCartByUserId(userId)));
 		return "cart";
 	}
 	
 	//thong tin ca nhan user
-	@GetMapping(value = {"/profile/{id}"})
+	@GetMapping(value = {"/profile/{userId}"})
 	public String profile(Model model,
-							@PathVariable("id") int id) {
-		model.addAttribute("user", baseService.findUserById(id));
+			HttpServletResponse response,
+			HttpServletRequest request,
+			@PathVariable("userId") int userId) {
+		Boolean test = false;
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		for(int i = 0 ; i < cookies.length; i++) {
+			if (cookies[i].getName().equals("SESSIONID")) {
+				test = true;
+				if(!cookies[i].getValue().equals(session.getId())) {
+					return "redirect:/";
+				}
+			}
+		}
+		if(!test){
+			return "redirect:/";
+		}
+		if(session.getAttribute("userId") != null) {
+			User user = baseService.findUserById(userId);
+			if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+				model.addAttribute("user", user);
+			}else
+				return "redirect:/profile/" + session.getAttribute("userId").toString();
+			model.addAttribute("user", user);
+		}
 		return "profile";
 	}
 	
@@ -160,7 +329,30 @@ public class BaseController {
 	@GetMapping(value = "/deleteCart/{userId}/{productId}")
 	public String deleteCart(@PathVariable(value = "userId", required = true) Integer userId, 
 				@PathVariable(value = "productId", required = true) Integer productId,
+				HttpServletResponse response,
+				HttpServletRequest request,
 				Model model) {
+		Boolean test = false;
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		for(int i = 0 ; i < cookies.length; i++) {
+			if (cookies[i].getName().equals("SESSIONID")) {
+				test = true;
+				if(!cookies[i].getValue().equals(session.getId())) {
+					return "redirect:/";
+				}
+			}
+		}
+		if(!test){
+			return "redirect:/";
+		}
+		if(session.getAttribute("userId") != null) {
+			User user = baseService.findUserById(userId);
+			if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+				model.addAttribute("user", user);
+			}else
+				return "redirect:/cart/" + session.getAttribute("userId").toString();
+		}
 		baseService.deleteCart(userId, productId);
 		return "redirect:/cart/" + userId;
 		
@@ -169,8 +361,31 @@ public class BaseController {
 	//thanh toan
 	@GetMapping(value = "/pay/{userId}")
 	public String pay(@PathVariable(value = "userId", required = true) Integer userId,
+			HttpServletResponse response,
+			HttpServletRequest request,
 			Model model) {
-		model.addAttribute("user", baseService.findUserById(userId));
+		Boolean test = false;
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		for(int i = 0 ; i < cookies.length; i++) {
+			if (cookies[i].getName().equals("SESSIONID")) {
+				test = true;
+				if(!cookies[i].getValue().equals(session.getId())) {
+					return "redirect:/";
+				}
+			}
+		}
+		if(!test){
+			return "redirect:/";
+		}
+		if(session.getAttribute("userId") != null) {
+			User user = baseService.findUserById(userId);
+			if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+				model.addAttribute("user", user);
+			}else
+				return "redirect:/pay/" + session.getAttribute("userId").toString();
+			model.addAttribute("user", user);
+		}
 		model.addAttribute("delivery", new Delivery());
 		return "pay";
 	}
@@ -190,9 +405,32 @@ public class BaseController {
 	//purchased
 	@GetMapping(value = "/purchased/{userId}")
 	public String purchased(@PathVariable(value = "userId") Integer userId,
+			HttpServletResponse response,
+			HttpServletRequest request,
 			Model model) {
+		Boolean test = false;
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		for(int i = 0 ; i < cookies.length; i++) {
+			if (cookies[i].getName().equals("SESSIONID")) {
+				test = true;
+				if(!cookies[i].getValue().equals(session.getId())) {
+					return "redirect:/";
+				}
+			}
+		}
+		if(!test){
+			return "redirect:/";
+		}
+		if(session.getAttribute("userId") != null) {
+			User user = baseService.findUserById(userId);
+			if(String.valueOf(user.getId()).equals(session.getAttribute("userId").toString())) {
+				model.addAttribute("user", user);
+			}else
+				return "redirect:/" + session.getAttribute("userId").toString();
+			model.addAttribute("user", user);
+		}
 		model.addAttribute("purchased", baseService.findOrderByUserId(userId));
-		model.addAttribute("user", baseService.findUserById(userId));
 		model.addAttribute("userId", userId);
 		return "purchased";
 	}

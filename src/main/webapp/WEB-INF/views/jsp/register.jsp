@@ -28,7 +28,7 @@
                             <c:if test = "${not empty email_error }">
                             	<p style = "color: red">${email_error }</p>
                             </c:if>
-                            <form:input path="address" type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="Your address"/><br/>
+                            <form:input path="address" value ="" type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="Your address"/><br/>
                             <form:input path="phoneNumber" type="text" id="contact_form_phone" class="contact_form_phone input_field" placeholder="Your phone number"/><br>
                             <form:input path="password" type="password" id="contact_form_name" class="contact_form_phone input_field" placeholder="Your password" required="required"/><br>                                 
                             <form:input path="confirmPassword" type="password" id="contact_form_name" class="contact_form_phone input_field" placeholder="Re-password" required="required"/>                                                                       
@@ -37,7 +37,12 @@
                             </c:if>
                             <div class="contact_form_button">
                                 <button type="submit" class="button contact_submit_button">Register</button><br>
-                                <a href="/TechShopTeam4.com/login">Login</a>
+                                <c:if test="${empty user || user.id == 0}">
+                                	<a href="/TechShopTeam4.com/login">Login</a>
+                                </c:if>
+                                <c:if test="${user.id > 1 }">
+                                	<a href="/TechShopTeam4.com/login/${user.id }">Login</a>
+                                </c:if>
                             </div>
                         </form:form>
                     </div>   

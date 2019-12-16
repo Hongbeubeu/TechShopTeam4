@@ -66,6 +66,7 @@
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown u-pro">
+                        	<a href = "/TechShopTeam4.com/admin/logout"><button class = "btn btn-danger">Logout</button></a>
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <img src="<c:url value="/resources/backend/images/users/5.jpg" />" alt="user" class="" /> 
 	                            <span class="hidden-md-down">${admin.email } &nbsp;</span> 

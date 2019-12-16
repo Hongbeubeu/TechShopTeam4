@@ -6,6 +6,7 @@ public class Delivery {
 	private String lastName;
 	private String phoneNumber;
 	private String address;
+	
 	public int getOrderId() {
 		return orderId;
 	}

@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/resources/backend/images/favicon.png" />">
-    <title>USERS</title>
+    <title>ORDERS</title>
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/backend/node_modules/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/backend/node_modules/perfect-scrollbar/css/perfect-scrollbar.css" />" rel="stylesheet">
@@ -44,18 +44,8 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <div class="row page-titles">
-                    <div class="col-md-10 align-self-center">
-                        <div class = "row">
-		                    <div class = "col">
-		                        <h3 class="text-themecolor">USERS</h3>
-		                    </div>
-	                     	<div class = "col">
-	                        <!-- Search form -->
-	                        <form action="/TechShopTeam4.com/admin/users/${admin.id }">
-								<input class="form-control" type="text" name = "userName" placeholder="Search User" aria-label="Search">
-	                       	</form>
-	                       	</div>
-	                    </div>
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">Delivery</h3>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -69,44 +59,40 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex no-block" style = "max-height: 355px">
+                                <div class="d-flex no-block">
                                     <div>
-                                        <h4 class="card-title m-b-0">User List</h4>
+                                        <h4 class="card-title m-b-0">Delivery bill</h4>
+                                       	<h5>${delivery.productName }</h5>
                                     </div>
                                 </div>	
-                                <c:if test="${not empty users }">
-                                <table class="table table-hover">
-                                	<tr>
-                                		<th>Email</th>
-                                		<th>Phone Number</th>
-                                		<th>Address</th>
-                                		<th>Delete</th>
-                                	</tr>
-                                	<c:if test="${not empty search }">
-                                	<c:forEach var = "user" items = "${search }">
-                                		<tr>
-                                			<td>${user.email }</td>
-                                			<td>${user.phoneNumber }</td>
-                                			<td>${user.address }</td>
-                                			<td><a href="/TechShopTeam4.com/admin/deleteUser/${admin.id }/${user.id }"><button class = "btn btn-danger">Delete</button></a></td>
-                                		</tr>
-                                	</c:forEach>
-                                	</c:if>
-                                	<c:forEach var = "user" items = "${users }">
-                                		<tr>
-                                			<td>${user.email }</td>
-                                			<td>${user.phoneNumber }</td>
-                                			<td>${user.address }</td>
-                                			<td><a href="/TechShopTeam4.com/admin/deleteUser/${admin.id }/${user.id }"><button class = "btn btn-danger">Delete</button></a></td>
-                                		</tr>
-                                	</c:forEach>
-                                </table>
-                                </c:if>
+                               	<div class = "row">
+                               		<div class = "col">
+                               			<p>Order Id:</p>
+                               			<p>Name: </p>
+                               			<p>Phone Number:</p>
+                               			<p>Address:</p>
+                               			<p>Date:</p>
+                               			<p>Total Price:</p>
+                               		</div>
+                               		<div class = "col">
+                               			<p>${delivery.orderId }</p>
+                               			<p>${delivery.lastName } ${delivery.firstName }</p>
+                               			<p>${delivery.phoneNumber }</p>
+                               			<p>${delivery.address }</p>
+                               			<p>${delivery.date }</p>
+                               			<p>${delivery.price }</p>
+                               		</div>
+                               	</div>
+                               	<a href="/TechShopTeam4.com/admin/deliveryOrder/${admin.id }/${delivery.orderId }/${delivery.productId}"><button class = "btn btn-primary">delivery</button></a>
                             </div>
                         </div>
                     </div>
                 </div>
     		</div>
+    		<div class = "card-body" ></div>
+            <div class = "card-body" ></div>
+           
+           
     <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
 

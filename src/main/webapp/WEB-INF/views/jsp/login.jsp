@@ -31,8 +31,14 @@
                             		</c:if>
                                     <div class="contact_form_button">
                                         <button type="submit" class="button contact_submit_button">Login</button><br>
-                                         <a href="/TechShopTeam4.com/register">Register</a><br>
-                                         <a href="/TechShopTeam4.com/admin/login">Admin Login</a>
+                                        <c:if test="${user.id > 0 }">
+                                         	<a href="/TechShopTeam4.com/register/${user.id }">Register</a><br>
+                                         	<a href="/TechShopTeam4.com/admin/login/${user.id }">Admin Login</a>
+                                        </c:if>
+                                        <c:if test="${empty user || user.id == 0}">
+                                        	<a href="/TechShopTeam4.com/register">Register</a><br>
+                                         	<a href="/TechShopTeam4.com/admin/login">Admin Login</a>
+                                        </c:if>
                                     </div>
                                 </form:form>
                             </div>

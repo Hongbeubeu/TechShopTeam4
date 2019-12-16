@@ -51,7 +51,9 @@
 		                    </div>
 	                     	<div class = "col">
 	                        <!-- Search form -->
-								<input class="form-control" type="text" placeholder="Search Product" aria-label="Search">
+	                        <form action="/TechShopTeam4.com/admin/products/${admin.id }">
+								<input class="form-control" name = "productName" type="text" placeholder="Search Product" aria-label="Search">
+	                       	</form>
 	                       	</div>
 	                       	<div class = "col">
 	                       	<div class = "col">
@@ -76,9 +78,28 @@
                            </div>
                  	</div>
                  </div>
+                  	<c:if test="${not empty search }">
+                  	<div><h4>Products Searched</h4></div>
                     <div class="card">
                         <div class="card-body" style="overflow:auto;">
-                            <div class="" id="sales-chart" style="height: 355px;">
+                            <div class="" id="sales-chart" style="max-height: 355px">
+                            	<c:forEach var = "product" items = "${search }">
+								<div class ="row" style = "padding: 15px">
+	                              	<div class = "col">${product.name }</div>
+	                              	<div class = "col">${product.quantity }</div>
+	                              	<div class = "col">${product.price }</div>
+	                              	<div class = "col"><a href="/TechShopTeam4.com/admin/addImage/${admin.id }/${product.id }"><button class = "btn btn-primary">Upload</button></a></div>
+	                              	<div class = "col"><a href="/TechShopTeam4.com/admin/update/${admin.id }/${product.id }"><button class = "btn btn-primary">Update</button></a></div>
+	                              	<div class = "col"><a href="/TechShopTeam4.com/admin/delete/${admin.id }/${product.id }"><button class = "btn btn-danger">Delete</button></a></div>
+	                            </div>
+                            	</c:forEach>
+                            </div>
+                     	</div>
+                    </div>
+                	</c:if>
+                    <div class="card">
+                    	<div class="card-body" style="overflow:auto;">
+                            <div class="" id="sales-chart" style="max-height: 355px;">
                             <c:forEach var = "product" items = "${products }">
 								<div class ="row" style = "padding: 15px">
 	                              	<div class = "col">${product.name }</div>
@@ -93,7 +114,8 @@
                         </div>
                     </div>
                 </div>
-            </div>   
+           </div>
+             
     <jsp:include page="admin_footer.jsp"></jsp:include>
 </body>
 
